@@ -2,7 +2,13 @@
 
 {% block content %}
 
+<script type="text/javascript" src="{{ url_for('static', filename = 'quiz.js') }}"></script>
+
+
 <b>This is quiz {{num}}!</b>
+
+<button id="prev-btn" data-num="{{ num }}">PREVIOUS QUESTION</button>
+<button id="next-btn" data-num="{{ num }}">NEXT QUESTION</button>
 
 {% endblock %}
 
