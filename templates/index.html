@@ -2,8 +2,12 @@
 
 {% block content %}
 
+<script type="text/javascript" src="{{ url_for('static', filename = 'index.js') }}"></script>
+
+
 <b>This is the home page</b>
 
-<button>CLICK ME TO START</button>
+<button id="start-btn">CLICK ME TO START</button>
+
 
 {% endblock %}
