@@ -1,0 +1,22 @@
+[
+  {
+    "lesson": 1,
+    "title": "What is a scale?",
+    "content": "A scale is a sequence of musical notes arranged in ascending or descending order. The most common scale is the C Major Scale: C – D – E – F – G – A – B. Listen to the sound below.",
+    "video": "https://www.youtube.com/embed/edScGrfl50M",
+    "type": "info"
+  },
+  {
+    "lesson": 2,
+    "title": "Major vs Minor Chords",
+    "content": "Major chord = Root + major 3rd + perfect 5th. Minor chord = Root + minor 3rd + perfect 5th. The key difference is the middle note.",
+    "video": "https://www.youtube.com/embed/Q8YFY5KHGEI",
+    "type": "info"
+  },
+  {
+    "lesson": 3,
+    "title": "Build a G Chord",
+    "content": "Try building a G chord! G Major = G + B + D. G Minor = G + Bb + D. Click to toggle between major/minor.",
+    "type": "interactive"
+  }
+]

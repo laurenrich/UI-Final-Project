@@ -1,10 +1,17 @@
 {% extends "layout.html" %}
-
 {% block content %}
-
-<b>This is quiz {{num}}!</b>
-
+<h2>Quiz: {{ question_data.prompt }}</h2>
+{% if question_data.audio_url %}
+<iframe width="400" height="150" src="{{ question_data.audio_url }}" frameborder="0" allowfullscreen></iframe>
+{% endif %}
+<div id="quiz-options">
+    {% for option in question_data.options %}
+    <button class="btn btn-outline-primary quiz-btn" data-value="{{ option }}">{{ option }}</button>
+    {% endfor %}
+</div>
+<p id="feedback" class="mt-3"></p>
+<script>
+    const questionNumber = {{ question_data.question }};
+</script>
+<script src="{{ url_for('static', filename='quiz.js') }}"></script>
 {% endblock %}
-
-
-

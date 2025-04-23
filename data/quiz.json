@@ -1,0 +1,15 @@
+[
+  {
+    "question": 1,
+    "prompt": "What kind of chord is this?",
+    "audio_url": "https://www.youtube.com/embed/4Nv2y6V6-3A",
+    "options": ["Major", "Minor"],
+    "answer": "Minor"
+  },
+  {
+    "question": 2,
+    "prompt": "What are the notes in a C Major chord?",
+    "options": ["C + E + G", "C + D + F", "C + Eb + G"],
+    "answer": "C + E + G"
+  }
+]

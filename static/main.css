@@ -1,0 +1,20 @@
+#piano {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.key {
+  width: 50px;
+  height: 180px;
+  border: 1px solid #000;
+  background: white;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+.key.active {
+  background: #ffd700;
+}

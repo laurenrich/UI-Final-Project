@@ -1,72 +1,55 @@
-from flask import Flask
-from flask import render_template
-from flask import Response, request, jsonify
+import json
+from datetime import datetime
+from flask import Flask, render_template, request, jsonify, redirect
+
 app = Flask(__name__)
 
+user_actions = []
+quiz_answers = []
 
-current_id = 2
-data = [
-    {
-        "id": 1,
-        "name": "michael scott"
-    },
-    {
-        "id": 2,
-        "name": "jim halpert"
-    },
-]
+with open("data/lessons.json") as f:
+    lessons = json.load(f)
 
-# ROUTES
+with open("data/quiz.json") as f:
+    quizzes = json.load(f)
 
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-@app.route('/')
-def hello_world():
-   return render_template('index.html')   
+@app.route("/learn/<int:n>")
+def learn(n):
+    lesson_data = next((item for item in lessons if item["lesson"] == n), None)
+    user_actions.append({
+        "page": f"learn/{n}",
+        "time": datetime.now().isoformat()
+    })
+    return render_template("learn.html", lesson_data=lesson_data)
 
+@app.route("/quiz/<int:n>", methods=["GET", "POST"])
+def quiz(n):
+    question_data = next((item for item in quizzes if item["question"] == n), None)
 
-@app.route('/learn/<num>')
-def learn(num=None):
-    return render_template('learn.html', num=num) 
+    if not question_data:
+        return redirect("/result")
 
-@app.route('/quiz/<num>')
-def quiz(num=None):
-    return render_template('quiz.html', num=num) 
+    if request.method == "POST":
+        data = request.get_json()
+        answer = data.get("answer")
+        correct = (answer == question_data["answer"])
+        quiz_answers.append({
+            "question": n,
+            "selected": answer,
+            "correct": correct
+        })
+        return jsonify({"correct": correct})
 
+    return render_template("quiz.html", question_data=question_data)
 
-@app.route('/people')
-def people():
-    return render_template('people.html', data=data)  
+@app.route("/result")
+def result():
+    score = sum(1 for q in quiz_answers if q["correct"])
+    return render_template("result.html", score=score, total=len(quiz_answers))
 
-
-# AJAX FUNCTIONS
-
-# ajax for people.js
-@app.route('/add_name', methods=['GET', 'POST'])
-def add_name():
-    global data 
-    global current_id 
-
-    json_data = request.get_json()   
-    name = json_data["name"] 
-    
-    # add new entry to array with 
-    # a new id and the name the user sent in JSON
-    current_id += 1
-    new_id = current_id 
-    new_name_entry = {
-        "name": name,
-        "id":  current_id
-    }
-    data.append(new_name_entry)
-
-    #send back the WHOLE array of data, so the client can redisplay it
-    return jsonify(data = data)
- 
-
-
-if __name__ == '__main__':
-   app.run(debug = True, port=5001)
-
-
-
-
+if __name__ == "__main__":
+    app.run(debug=True, port=5001)

@@ -1,13 +1,14 @@
 {% extends "layout.html" %}
-
 {% block content %}
-
-<script type="text/javascript" src="{{ url_for('static', filename = 'index.js') }}"></script>
-
-
-<b>This is the home page</b>
-
-<button id="start-btn">CLICK ME TO START</button>
-
-
+<h1>🎹 Piano Learning</h1>
+<p>Welcome! Ready to learn chords?</p>
+<button id="start-btn" class="btn btn-primary">Start Learning</button>
+<hr>
+<ul>
+    <li><a href="/learn/1">🎵 What is a scale?</a></li>
+    <li><a href="/learn/2">🎹 Major vs Minor chords</a></li>
+    <li><a href="/learn/3">🧪 Build your first chord</a></li>
+    <li><a href="/quiz/1">📊 Take a quick quiz!</a></li>
+</ul>
+<script src="{{ url_for('static', filename='index.js') }}"></script>
 {% endblock %}
