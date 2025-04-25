@@ -1,7 +1,151 @@
+/* Navbar styles */
+.custom-navbar {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50 !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.brand-icon {
+    font-size: 1.6rem;
+}
+
+.brand-text {
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    margin: 0 0.2rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    color: #6c757d !important;
+    font-size: 0.95rem;
+}
+
+.nav-link:hover {
+    color: #2c3e50 !important;
+    transform: translateY(-1px);
+}
+
+.navbar-toggler {
+    padding: 0.5rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+@media (max-width: 991.98px) {
+    .nav-link {
+        padding: 0.75rem 1rem !important;
+    }
+    
+    .navbar-collapse {
+        background: white;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin-top: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* Hero section */
+.hero-section {
+    background-color: #f8f9fa;
+    border-radius: 1rem;
+    padding: 4rem 2rem;
+    margin-top: -1.5rem;
+}
+
+.hero-section .display-4 {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.hero-section .lead {
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Card styles */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1) !important;
+}
+
+.card-icon {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.card-title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.card-text {
+    color: #6c757d;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Feature section */
+.feature {
+    padding: 1rem;
+}
+
+.feature i {
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.feature h4 {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Button styles */
+.btn {
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+}
+
+.btn-lg {
+    padding: 0.75rem 2rem;
+}
+
+.btn-outline-primary:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+}
+
+/* Piano styles */
+
 #piano {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  position: relative;
 }
 .key {
   width: 50px;
@@ -17,4 +161,112 @@
 }
 .key.active {
   background: #ffd700;
+}
+
+.piano-container {
+    position: relative;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 600px;
+}
+
+#piano {
+    position: relative;
+    height: 200px;
+}
+
+.key-container {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.white-key {
+    width: 60px;
+    height: 200px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 0 0 5px 5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 10px;
+    color: #666;
+    margin: 0;
+}
+
+.black-key {
+    width: 40px;
+    height: 120px;
+    background: #333;
+    position: absolute;
+    top: 0;
+    right: -20px;
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 0 0 3px 3px;
+}
+
+.black-key.empty {
+    background: transparent;
+    pointer-events: none;
+}
+
+/* Key states */
+.white-key:hover, .black-key:hover {
+    background: #e9ecef;
+}
+
+.white-key.selected {
+    background: #b8daff;
+}
+
+.black-key.selected {
+    background: #004085;
+}
+
+.white-key.correct {
+    background: #c3e6cb;
+}
+
+.black-key.correct {
+    background: #155724;
+}
+
+.white-key.incorrect {
+    background: #f5c6cb;
+}
+
+.black-key.incorrect {
+    background: #721c24;
+}
+
+/* Position black keys */
+.black-key:nth-child(8) { left: 40px; }
+.black-key:nth-child(9) { left: 100px; }
+.black-key:nth-child(10) { left: 160px; }
+.black-key:nth-child(11) { left: 280px; }
+.black-key:nth-child(12) { left: 340px; }
+.black-key:nth-child(13) { left: 400px; }
+
+.progress {
+    height: 2rem;
+    font-size: 1rem;
+    background-color: #e9ecef;
+    border-radius: 0.5rem;
+}
+
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #007bff;
+    transition: width 0.6s ease;
 }

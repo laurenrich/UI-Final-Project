@@ -1,14 +1,85 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>🎹 Piano Learning</h1>
-<p>Welcome! Ready to learn chords?</p>
-<button id="start-btn" class="btn btn-primary">Start Learning</button>
-<hr>
-<ul>
-    <li><a href="/learn/1">🎵 What is a scale?</a></li>
-    <li><a href="/learn/2">🎹 Major vs Minor chords</a></li>
-    <li><a href="/learn/3">🧪 Build your first chord</a></li>
-    <li><a href="/quiz/1">📊 Take a quick quiz!</a></li>
-</ul>
+<div class="hero-section text-center py-5 mb-5">
+    <h1 class="display-4 mb-3">🎹 Master Piano Chords</h1>
+    <p class="lead mb-4">Learn to play beautiful chords and understand music theory through interactive lessons</p>
+    <a href="/learn/1" class="btn btn-primary btn-lg px-4 me-2">Start Learning</a>
+    <a href="/quiz/1" class="btn btn-outline-secondary btn-lg px-4">Take Quiz</a>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <div class="card-icon mb-3">🎵</div>
+                <h5 class="card-title">Scales Basics</h5>
+                <p class="card-text">Learn about musical scales and how they form the foundation of chords.</p>
+                <a href="/learn/1" class="btn btn-outline-primary stretched-link">Start Lesson</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <div class="card-icon mb-3">🎹</div>
+                <h5 class="card-title">Major vs Minor</h5>
+                <p class="card-text">Discover the difference between major and minor chords and their unique sounds.</p>
+                <a href="/learn/2" class="btn btn-outline-primary stretched-link">Start Lesson</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <div class="card-icon mb-3">🧪</div>
+                <h5 class="card-title">Build Chords</h5>
+                <p class="card-text">Learn how to construct your first chord using our interactive piano.</p>
+                <a href="/learn/3" class="btn btn-outline-primary stretched-link">Start Lesson</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <div class="card-icon mb-3">📊</div>
+                <h5 class="card-title">Test Your Skills</h5>
+                <p class="card-text">Put your knowledge to the test with our interactive chord quiz.</p>
+                <a href="/quiz/1" class="btn btn-outline-primary stretched-link">Take Quiz</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 mx-auto text-center">
+        <div class="card bg-light border-0 p-4">
+            <h3 class="h4 mb-3">Why Learn Piano with Us?</h3>
+            <div class="row g-4">
+                <div class="col-sm-4">
+                    <div class="feature">
+                        <i class="bi bi-music-note h3"></i>
+                        <h4 class="h6">Interactive Learning</h4>
+                        <p class="small text-muted">Practice with our virtual piano</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="feature">
+                        <i class="bi bi-lightning h3"></i>
+                        <h4 class="h6">Quick Progress</h4>
+                        <p class="small text-muted">Learn at your own pace</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="feature">
+                        <i class="bi bi-trophy h3"></i>
+                        <h4 class="h6">Test Your Skills</h4>
+                        <p class="small text-muted">Regular quizzes to check progress</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="{{ url_for('static', filename='index.js') }}"></script>
 {% endblock %}

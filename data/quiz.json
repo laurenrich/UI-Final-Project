@@ -1,15 +1,34 @@
 [
   {
     "question": 1,
-    "prompt": "What kind of chord is this?",
-    "audio_url": "https://www.youtube.com/embed/4Nv2y6V6-3A",
-    "options": ["Major", "Minor"],
-    "answer": "Minor"
+    "prompt": "Listen to this chord and select what it is:",
+    "type": "multiple_choice",
+    "options": ["B Minor", "D Major", "F# Minor", "G Major"],
+    "answer": ["B4", "D4", "F#4"],
+    "correct_option": "B Minor"
   },
   {
     "question": 2,
-    "prompt": "What are the notes in a C Major chord?",
-    "options": ["C + E + G", "C + D + F", "C + Eb + G"],
-    "answer": "C + E + G"
+    "prompt": "Build a B Minor chord. Select the three notes that make up the chord (B, D, F#).",
+    "type": "piano",
+    "answer": ["B4", "D4", "F#4"]
+  },
+  {
+    "question": 3,
+    "prompt": "Play a C Major chord. Select the three notes that make up the chord.",
+    "type": "piano",
+    "answer": ["C4", "E4", "G4"]
+  },
+  {
+    "question": 4,
+    "prompt": "Play a D Minor chord. Select the three notes that make up the chord.",
+    "type": "piano",
+    "answer": ["D4", "F4", "A4"]
+  },
+  {
+    "question": 5,
+    "prompt": "Play an E Minor chord. Select the three notes that make up the chord.",
+    "type": "piano",
+    "answer": ["E4", "G4", "B4"]
   }
 ]

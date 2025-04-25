@@ -1,17 +1,71 @@
 {% extends "layout.html" %}
 {% block content %}
-<h2>Quiz: {{ question_data.prompt }}</h2>
-{% if question_data.audio_url %}
-<iframe width="400" height="150" src="{{ question_data.audio_url }}" frameborder="0" allowfullscreen></iframe>
-{% endif %}
-<div id="quiz-options">
-    {% for option in question_data.options %}
-    <button class="btn btn-outline-primary quiz-btn" data-value="{{ option }}">{{ option }}</button>
-    {% endfor %}
+<div class="progress mb-3">
+    <div class="progress-bar" role="progressbar" style="width: {{ progress }}%" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+        Question {{ current_question }} of {{ total_questions }}
+    </div>
 </div>
-<p id="feedback" class="mt-3"></p>
+
+<h2>{{ question_data.prompt }}</h2>
+
+{% if question_data.type == 'piano' %}
+<div class="piano-container mb-4">
+    <div id="piano" class="d-flex justify-content-center">
+        <div class="key-container">
+            <div class="white-key" data-note="C4">C</div>
+            <div class="black-key" data-note="C#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="D4">D</div>
+            <div class="black-key" data-note="D#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="E4">E</div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="F4">F</div>
+            <div class="black-key" data-note="F#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="G4">G</div>
+            <div class="black-key" data-note="G#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="A4">A</div>
+            <div class="black-key" data-note="A#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="B4">B</div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="options-container mb-4">
+    <div class="d-grid gap-2 col-md-6 mx-auto">
+        {% for option in question_data.options %}
+        <button class="btn btn-outline-primary option-btn" data-value="{{ option }}">{{ option }}</button>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<div class="controls text-center mb-4">
+    <button id="play-btn" class="btn btn-success me-2">Play Sound</button>
+    {% if question_data.type == 'piano' %}
+    <button id="submit-btn" class="btn btn-primary">Submit Answer</button>
+    {% endif %}
+</div>
+
+<div id="feedback" class="text-center mt-3"></div>
+
 <script>
-    const questionNumber = {{ question_data.question }};
+    window.questionNumber = {{ question_data.question }};
+    window.correctNotes = {{ question_data.answer|tojson|safe }};
+    window.questionType = "{{ question_data.type }}";
+    {% if question_data.type == 'multiple_choice' %}
+    window.correctOption = "{{ question_data.correct_option }}";
+    {% endif %}
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
 <script src="{{ url_for('static', filename='quiz.js') }}"></script>
 {% endblock %}
