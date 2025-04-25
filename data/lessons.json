@@ -2,9 +2,9 @@
   {
     "lesson": 1,
     "title": "What is a scale?",
-    "content": "A scale is a sequence of musical notes arranged in ascending or descending order. The most common scale is the C Major Scale: C – D – E – F – G – A – B. Listen to the sound below.",
-    "video": "https://www.youtube.com/embed/edScGrfl50M",
-    "type": "info"
+    "content": "A scale is a sequence of musical notes arranged in ascending or descending order. The most common scale is the C Major Scale: C – D – E – F – G – A – B. Click the button below to hear the scale.",
+    "scale": ["C4", "D4", "E4", "F4", "G4", "A4", "B4"],
+    "type": "scale"
   },
   {
     "lesson": 2,

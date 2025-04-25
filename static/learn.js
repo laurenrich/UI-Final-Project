@@ -8,38 +8,75 @@ const sounds = {
   "B": "https://piano-mp3.s3.us-west-1.amazonaws.com/B.mp3"
 };
 
-let selectedNotes = [];
-
 $(document).ready(function () {
-  $(".key").click(function () {
-    let note = $(this).data("note");
-    let audio = $("#audio-player")[0];
-    audio.src = sounds[note];
-    audio.play();
+    // Initialize Tone.js synth
+    const synth = new Tone.Synth().toDestination();
+    let selectedNotes = new Set();
 
-    $(this).toggleClass("active");
+    // Handle piano key clicks
+    $('.white-key, .black-key').click(function() {
+        const note = $(this).data('note');
+        if (!note) return;
+        
+        // Toggle selection
+        $(this).toggleClass('selected');
+        if (selectedNotes.has(note)) {
+            selectedNotes.delete(note);
+        } else {
+            selectedNotes.add(note);
+        }
+        
+        // Play the note
+        synth.triggerAttackRelease(note, "8n");
+    });
 
-    if (selectedNotes.includes(note)) {
-      selectedNotes = selectedNotes.filter(n => n !== note);
-    } else {
-      selectedNotes.push(note);
-    }
-  });
+    // Play C Major Scale
+    $('#play-scale').click(async function() {
+        // Need to start audio context on user gesture
+        await Tone.start();
+        
+        // Play each note in the scale with a slight delay
+        const scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"];
+        scale.forEach((note, index) => {
+            setTimeout(() => {
+                synth.triggerAttackRelease(note, "4n");
+                // Highlight the key being played
+                $(`.white-key[data-note="${note}"]`).addClass('selected');
+                setTimeout(() => {
+                    $(`.white-key[data-note="${note}"]`).removeClass('selected');
+                }, 500);
+            }, index * 600);
+        });
+    });
 
-  $("#submit-chord").click(function () {
-    const major = ["G", "B", "D"].sort().toString();
-    const minor = ["G", "Bb", "D"].sort().toString();
-    const userChord = selectedNotes.sort().toString();
-
-    let feedback = "";
-    if (userChord === major) {
-      feedback = "✅ That's a G Major chord!";
-    } else if (userChord === minor) {
-      feedback = "✅ That's a G Minor chord!";
-    } else {
-      feedback = "❌ That's not a correct G chord. Try again!";
-    }
-
-    $("#chord-feedback").text(feedback);
-  });
+    // Submit chord (for interactive lessons)
+    $('#submit-chord').click(function() {
+        const userNotes = Array.from(selectedNotes).sort();
+        const gMajor = ["G4", "B4", "D5"].sort();
+        const gMinor = ["G4", "Bb4", "D5"].sort();
+        
+        // Compare arrays
+        const isGMajor = arraysEqual(userNotes, gMajor);
+        const isGMinor = arraysEqual(userNotes, gMinor);
+        
+        let feedback = "";
+        if (isGMajor) {
+            feedback = "✅ That's a G Major chord!";
+        } else if (isGMinor) {
+            feedback = "✅ That's a G Minor chord!";
+        } else {
+            feedback = "❌ That's not a correct G chord. Try again!";
+        }
+        
+        $('#chord-feedback').html(feedback);
+    });
 });
+
+// Helper function to compare arrays
+function arraysEqual(a, b) {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false;
+    }
+    return true;
+}
