@@ -139,6 +139,78 @@
     color: #fff;
 }
 
+/* Piano styling */
+.piano-container {
+    margin: 20px 0;
+    user-select: none;
+}
+
+.key-container {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.white-key {
+    width: 40px;
+    height: 120px;
+    background-color: white;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 5px;
+    cursor: pointer;
+    z-index: 1;
+    position: relative;
+}
+
+.black-key {
+    width: 24px;
+    height: 80px;
+    background-color: black;
+    position: absolute;
+    right: -12px;
+    top: 0;
+    z-index: 2;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 5px;
+    font-size: 0.8em;
+}
+
+/* Selected key styling */
+.white-key.selected {
+    background-color: #a8e6cf;
+}
+
+.black-key.selected {
+    background-color: #3d5a80;
+}
+
+/* Highlighted key styling for chord diagrams */
+.white-key.highlight {
+    background-color: #ffd3b6;
+}
+
+.black-key.highlight {
+    background-color: #ff8b94;
+}
+
+/* Chord diagram styling */
+.chord-diagram {
+    background-color: #f8f9fa;
+    margin-bottom: 1rem;
+}
+
+.chord-practice {
+    background-color: #f8f9fa;
+}
+
 /* Piano styles */
 
 #piano {

@@ -8,13 +8,38 @@
   },
   {
     "lesson": 2,
-    "title": "Major vs Minor Chords",
-    "content": "Major chord = Root + major 3rd + perfect 5th. Minor chord = Root + minor 3rd + perfect 5th. The key difference is the middle note.",
-    "video": "https://www.youtube.com/embed/Q8YFY5KHGEI",
-    "type": "info"
+    "title": "Major vs Minor Chords: Visual Guide",
+    "content": "Let's understand the difference between major and minor chords visually. Below are diagrams showing the C major chord (C + E + G) and C minor chord (C + Eb + G). Notice how the middle note (the third) is what changes between major and minor.",
+    "type": "info",
+    "diagrams": {
+      "major": {
+        "notes": ["C4", "E4", "G4"],
+        "title": "C Major Chord"
+      },
+      "minor": {
+        "notes": ["C4", "Eb4", "G4"],
+        "title": "C Minor Chord"
+      }
+    }
   },
   {
     "lesson": 3,
+    "title": "Major vs Minor Chords: Practice",
+    "content": "Now it's your turn! Try playing both the C major and C minor chords on the pianos below. Click the keys to select them, then press 'Play Chord' to hear how they sound together.",
+    "type": "interactive",
+    "chords": {
+      "major": {
+        "notes": ["C4", "E4", "G4"],
+        "title": "C Major"
+      },
+      "minor": {
+        "notes": ["C4", "Eb4", "G4"],
+        "title": "C Minor"
+      }
+    }
+  },
+  {
+    "lesson": 4,
     "title": "Build a G Chord",
     "content": "Try building a G chord! G Major = G + B + D. G Minor = G + Bb + D. Click to toggle between major/minor.",
     "type": "interactive"

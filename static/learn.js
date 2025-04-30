@@ -10,20 +10,40 @@ const sounds = {
 
 $(document).ready(function () {
     // Initialize Tone.js synth
-    const synth = new Tone.Synth().toDestination();
-    let selectedNotes = new Set();
+    const synth = new Tone.PolySynth().toDestination();
+    let selectedNotesMajor = new Set();
+    let selectedNotesMinor = new Set();
+    let selectedNotes = new Set(); // for lesson 3
 
-    // Handle piano key clicks
+    // Handle piano key clicks for all pianos
     $('.white-key, .black-key').click(function() {
         const note = $(this).data('note');
         if (!note) return;
         
-        // Toggle selection
+        // Determine which piano was clicked
+        const piano = $(this).closest('.piano-container').find('div[id]').attr('id');
+        
+        // Toggle selection and store notes in appropriate Set
         $(this).toggleClass('selected');
-        if (selectedNotes.has(note)) {
-            selectedNotes.delete(note);
-        } else {
-            selectedNotes.add(note);
+        
+        if (piano === 'major-piano') {
+            if (selectedNotesMajor.has(note)) {
+                selectedNotesMajor.delete(note);
+            } else {
+                selectedNotesMajor.add(note);
+            }
+        } else if (piano === 'minor-piano') {
+            if (selectedNotesMinor.has(note)) {
+                selectedNotesMinor.delete(note);
+            } else {
+                selectedNotesMinor.add(note);
+            }
+        } else if (piano === 'chord-piano') {
+            if (selectedNotes.has(note)) {
+                selectedNotes.delete(note);
+            } else {
+                selectedNotes.add(note);
+            }
         }
         
         // Play the note
@@ -49,7 +69,33 @@ $(document).ready(function () {
         });
     });
 
-    // Submit chord (for interactive lessons)
+    // Play Chord buttons (for lesson 2.5)
+    $('.play-chord').click(async function() {
+        await Tone.start();
+        
+        const pianoType = $(this).data('piano');
+        const selectedNotes = pianoType === 'major' ? selectedNotesMajor : selectedNotesMinor;
+        const correctChord = pianoType === 'major' ? 
+            new Set(["C4", "E4", "G4"]) : 
+            new Set(["C4", "Eb4", "G4"]);
+        
+        // Play all selected notes simultaneously
+        const notesToPlay = Array.from(selectedNotes);
+        if (notesToPlay.length > 0) {
+            synth.triggerAttackRelease(notesToPlay, "2n");
+        }
+        
+        // Check if the chord is correct
+        const isCorrect = setsEqual(selectedNotes, correctChord);
+        const feedback = isCorrect ? 
+            "✅ Perfect! That's the correct chord!" : 
+            "❌ Not quite. Try again!";
+        
+        // Show feedback
+        $(this).closest('.controls').find('.chord-feedback').html(feedback);
+    });
+
+    // Submit chord (for lesson 3)
     $('#submit-chord').click(function() {
         const userNotes = Array.from(selectedNotes).sort();
         const gMajor = ["G4", "B4", "D5"].sort();
@@ -77,6 +123,15 @@ function arraysEqual(a, b) {
     if (a.length !== b.length) return false;
     for (let i = 0; i < a.length; i++) {
         if (a[i] !== b[i]) return false;
+    }
+    return true;
+}
+
+// Helper function to compare Sets
+function setsEqual(a, b) {
+    if (a.size !== b.size) return false;
+    for (let item of a) {
+        if (!b.has(item)) return false;
     }
     return true;
 }
