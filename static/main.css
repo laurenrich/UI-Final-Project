@@ -201,6 +201,27 @@
     background-color: #ff8b94;
 }
 
+/* Incorrect and correct key styling */
+.white-key.incorrect {
+    background-color: #ffb3b3;
+    border: 2px solid #ff0000;
+}
+
+.black-key.incorrect {
+    background-color: #cc0000;
+    border: 2px solid #ff0000;
+}
+
+.white-key.correct {
+    background-color: #b3ffb3;
+    border: 2px solid #00cc00;
+}
+
+.black-key.correct {
+    background-color: #006600;
+    border: 2px solid #00cc00;
+}
+
 /* Chord diagram styling */
 .chord-diagram {
     background-color: #f8f9fa;

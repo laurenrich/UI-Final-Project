@@ -13,7 +13,12 @@ $(document).ready(function () {
     const synth = new Tone.PolySynth().toDestination();
     let selectedNotesMajor = new Set();
     let selectedNotesMinor = new Set();
-    let selectedNotes = new Set(); // for lesson 3
+    let selectedNotes = new Set(); // for lesson 4
+
+    // Remove incorrect and correct key highlights
+    function clearKeyHighlights(pianoId) {
+        $(`#${pianoId} .white-key, #${pianoId} .black-key`).removeClass('incorrect correct');
+    }
 
     // Handle piano key clicks for all pianos
     $('.white-key, .black-key').click(function() {
@@ -32,12 +37,14 @@ $(document).ready(function () {
             } else {
                 selectedNotesMajor.add(note);
             }
+            clearKeyHighlights('major-piano');
         } else if (piano === 'minor-piano') {
             if (selectedNotesMinor.has(note)) {
                 selectedNotesMinor.delete(note);
             } else {
                 selectedNotesMinor.add(note);
             }
+            clearKeyHighlights('minor-piano');
         } else if (piano === 'chord-piano') {
             if (selectedNotes.has(note)) {
                 selectedNotes.delete(note);
@@ -69,7 +76,7 @@ $(document).ready(function () {
         });
     });
 
-    // Play Chord buttons (for lesson 2.5)
+    // Play Chord buttons (for lesson 3)
     $('.play-chord').click(async function() {
         await Tone.start();
         
@@ -84,18 +91,39 @@ $(document).ready(function () {
         if (notesToPlay.length > 0) {
             synth.triggerAttackRelease(notesToPlay, "2n");
         }
+
+        // Clear previous highlights
+        clearKeyHighlights(pianoType + '-piano');
         
-        // Check if the chord is correct
-        const isCorrect = setsEqual(selectedNotes, correctChord);
-        const feedback = isCorrect ? 
+        // Check each selected note and highlight incorrect ones
+        let allCorrect = true;
+        selectedNotes.forEach(note => {
+            if (!correctChord.has(note)) {
+                // Highlight incorrect key in red
+                $(`#${pianoType}-piano [data-note="${note}"]`).addClass('incorrect');
+                allCorrect = false;
+            }
+        });
+
+        // Highlight missing correct notes
+        correctChord.forEach(note => {
+            if (!selectedNotes.has(note)) {
+                // Highlight missing key in green
+                $(`#${pianoType}-piano [data-note="${note}"]`).addClass('correct');
+                allCorrect = false;
+            }
+        });
+        
+        // Show feedback
+        const feedback = allCorrect ? 
             "✅ Perfect! That's the correct chord!" : 
-            "❌ Not quite. Try again!";
+            "❌ Not quite. Red keys are incorrect, green keys show the correct notes.";
         
         // Show feedback
         $(this).closest('.controls').find('.chord-feedback').html(feedback);
     });
 
-    // Submit chord (for lesson 3)
+    // Submit chord (for lesson 4)
     $('#submit-chord').click(function() {
         const userNotes = Array.from(selectedNotes).sort();
         const gMajor = ["G4", "B4", "D5"].sort();
