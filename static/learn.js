@@ -29,6 +29,8 @@ $(document).ready(function () {
             // For lesson 4, track clicked keys for chord building
             if (this.closest('#major-piano, #minor-piano')) {
                 this.classList.toggle('selected');
+                // Remove incorrect/correct highlights when a new selection is made
+                this.classList.remove('incorrect', 'correct');
             }
         });
     });
@@ -97,7 +99,7 @@ $(document).ready(function () {
                 feedback.textContent = 'Perfect! That\'s the correct chord!';
                 feedback.style.color = 'green';
             } else {
-                feedback.textContent = 'Not quite. Green keys show the correct notes, red keys show incorrect ones.';
+                feedback.textContent = 'Not quite. The green keys show what you need. You can keep trying - just click keys to select or unselect them.';
                 feedback.style.color = 'red';
             }
         });

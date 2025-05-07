@@ -72,6 +72,34 @@
                     {% endif %}
 
                     {% if lesson_data.lesson == 3 %}
+                    <!-- Major vs Minor Audio Examples -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Major Key Version</h5>
+                                    <audio controls>
+                                        <source src="{{ url_for('static', filename='audio/major_melody.mp3') }}" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Minor Key Version</h5>
+                                    <audio controls>
+                                        <source src="{{ url_for('static', filename='audio/minor_melody.mp3') }}" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if lesson_data.lesson == 4 %}
                     <!-- Chord Diagrams -->
                     <div class="row mb-4">
                         <div class="col-md-6">
@@ -139,13 +167,13 @@
                     </div>
                     {% endif %}
 
-                    {% if lesson_data.lesson == 4 %}
+                    {% if lesson_data.lesson == 5 %}
                     <!-- Interactive Chord Practice -->
                     <div class="row mb-4">
                         <!-- G Major Piano -->
                         <div class="col-md-6">
                             <div class="chord-practice text-center p-3 border rounded">
-                                <h4>Build a G Major Chord</h4>
+                                <h4>Build G Major Chord</h4>
                                 <div class="piano-container">
                                     <div id="major-piano" class="d-flex justify-content-center">
                                         <div class="key-container">
@@ -180,7 +208,7 @@
                         <!-- G Minor Piano -->
                         <div class="col-md-6">
                             <div class="chord-practice text-center p-3 border rounded">
-                                <h4>Build a G Minor Chord</h4>
+                                <h4>Build G Minor Chord</h4>
                                 <div class="piano-container">
                                     <div id="minor-piano" class="d-flex justify-content-center">
                                         <div class="key-container">
@@ -209,36 +237,6 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-success check-chord" data-piano="minor">Check Chord</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endif %}
-
-                    {% if lesson_data.lesson == 5 %}
-                    <!-- Major vs Minor Audio Examples -->
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Original (Major Key)</h5>
-                                    <p class="card-text">Listen to "A Whole New World" in its original major key:</p>
-                                    <audio id="major-song" controls>
-                                        <source src="{{ url_for('static', filename='audio/' + lesson_data.audio.major) }}" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Minor Key Version</h5>
-                                    <p class="card-text">Now hear how it sounds in minor key:</p>
-                                    <audio id="minor-song" controls>
-                                        <source src="{{ url_for('static', filename='audio/' + lesson_data.audio.minor) }}" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
                                 </div>
                             </div>
                         </div>
