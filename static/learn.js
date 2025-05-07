@@ -20,108 +20,172 @@ $(document).ready(function () {
         $(`#${pianoId} .white-key, #${pianoId} .black-key`).removeClass('incorrect correct');
     }
 
-    // Handle piano key clicks for all pianos
-    $('.white-key, .black-key').click(function() {
-        const note = $(this).data('note');
-        if (!note) return;
-        
-        // Determine which piano was clicked
-        const piano = $(this).closest('.piano-container').find('div[id]').attr('id');
-        
-        // Toggle selection and store notes in appropriate Set
-        $(this).toggleClass('selected');
-        
-        if (piano === 'major-piano') {
-            if (selectedNotesMajor.has(note)) {
-                selectedNotesMajor.delete(note);
-            } else {
-                selectedNotesMajor.add(note);
+    // Add click event listeners to piano keys
+    document.querySelectorAll('.white-key, .black-key').forEach(key => {
+        key.addEventListener('click', function() {
+            const note = this.dataset.note;
+            synth.triggerAttackRelease(note, "8n");
+            
+            // For lesson 4, track clicked keys for chord building
+            if (this.closest('#major-piano, #minor-piano')) {
+                this.classList.toggle('selected');
             }
-            clearKeyHighlights('major-piano');
-        } else if (piano === 'minor-piano') {
-            if (selectedNotesMinor.has(note)) {
-                selectedNotesMinor.delete(note);
-            } else {
-                selectedNotesMinor.add(note);
-            }
-            clearKeyHighlights('minor-piano');
-        } else if (piano === 'chord-piano') {
-            if (selectedNotes.has(note)) {
-                selectedNotes.delete(note);
-            } else {
-                selectedNotes.add(note);
-            }
-        }
-        
-        // Play the note
-        synth.triggerAttackRelease(note, "8n");
+        });
     });
 
-    // Play C Major Scale
-    $('#play-scale').click(async function() {
-        // Need to start audio context on user gesture
+    // Event listener for play scale button
+    const playScaleBtn = document.getElementById('play-scale');
+    if (playScaleBtn) {
+        playScaleBtn.addEventListener('click', playScale);
+    }
+
+    // Event listeners for interval demo
+    const playHalfStepBtn = document.getElementById('play-half-step');
+    const playWholeStepBtn = document.getElementById('play-whole-step');
+    if (playHalfStepBtn) {
+        playHalfStepBtn.addEventListener('click', () => playInterval(['C4', 'C#4']));
+    }
+    if (playWholeStepBtn) {
+        playWholeStepBtn.addEventListener('click', () => playInterval(['C4', 'D4']));
+    }
+
+    // Event listeners for chord checking
+    document.querySelectorAll('.check-chord').forEach(button => {
+        button.addEventListener('click', function() {
+            const pianoType = this.dataset.piano;
+            const piano = document.getElementById(`${pianoType}-piano`);
+            
+            // Clear previous highlights
+            piano.querySelectorAll('.white-key, .black-key').forEach(key => {
+                key.classList.remove('correct', 'incorrect');
+            });
+            
+            const selectedNotes = Array.from(piano.querySelectorAll('.selected'))
+                .map(key => key.dataset.note);
+            
+            const correctNotes = pianoType === 'major' ?
+                ['G4', 'B4', 'D5'] : ['G4', 'Bb4', 'D5'];
+            
+            const feedback = piano.closest('.chord-practice')
+                .querySelector('.chord-feedback');
+            
+            // Check each selected note
+            selectedNotes.forEach(note => {
+                const key = piano.querySelector(`[data-note="${note}"]`);
+                if (correctNotes.includes(note)) {
+                    key.classList.add('correct');
+                } else {
+                    key.classList.add('incorrect');
+                }
+            });
+            
+            // Highlight missing notes
+            correctNotes.forEach(note => {
+                if (!selectedNotes.includes(note)) {
+                    const key = piano.querySelector(`[data-note="${note}"]`);
+                    key.classList.add('correct');
+                }
+            });
+            
+            // Only play the selected notes
+            if (selectedNotes.length > 0) {
+                playChord(selectedNotes);
+            }
+
+            // Show feedback
+            if (arraysEqual(selectedNotes.sort(), correctNotes.sort())) {
+                feedback.textContent = 'Perfect! That\'s the correct chord!';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Not quite. Green keys show the correct notes, red keys show incorrect ones.';
+                feedback.style.color = 'red';
+            }
+        });
+    });
+
+    // Event listeners for play chord buttons
+    document.querySelectorAll('.play-chord').forEach(button => {
+        button.addEventListener('click', function() {
+            const pianoType = this.dataset.piano;
+            const notes = pianoType === 'major' ? 
+                ['C4', 'E4', 'G4'] : ['C4', 'Eb4', 'G4'];
+            playChord(notes);
+        });
+    });
+
+    async function playNote(note) {
         await Tone.start();
+        synth.triggerAttackRelease(note, "4n");
+    }
+
+    async function playScale() {
+        await Tone.start();
+        const scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
         
-        // Play each note in the scale with a slight delay
-        const scale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"];
+        // Clear any existing highlights
+        document.querySelectorAll('#piano .white-key, #piano .black-key')
+            .forEach(key => key.classList.remove('highlight'));
+        
         scale.forEach((note, index) => {
             setTimeout(() => {
+                // Remove previous highlight
+                document.querySelectorAll('#piano .white-key, #piano .black-key')
+                    .forEach(key => key.classList.remove('highlight'));
+                
+                // Add highlight to current note
+                const key = document.querySelector(`#piano [data-note="${note}"]`);
+                if (key) {
+                    key.classList.add('highlight');
+                }
+                
+                // Play the note
                 synth.triggerAttackRelease(note, "4n");
-                // Highlight the key being played
-                $(`.white-key[data-note="${note}"]`).addClass('selected');
+                
+                // Remove highlight after note duration
                 setTimeout(() => {
-                    $(`.white-key[data-note="${note}"]`).removeClass('selected');
-                }, 500);
-            }, index * 600);
+                    if (key) {
+                        key.classList.remove('highlight');
+                    }
+                }, 400); // Remove highlight slightly before next note
+            }, index * 500);
         });
-    });
+    }
 
-    // Play Chord buttons (for lesson 3)
-    $('.play-chord').click(async function() {
+    async function playInterval(notes) {
         await Tone.start();
-        
-        const pianoType = $(this).data('piano');
-        const selectedNotes = pianoType === 'major' ? selectedNotesMajor : selectedNotesMinor;
-        const correctChord = pianoType === 'major' ? 
-            new Set(["C4", "E4", "G4"]) : 
-            new Set(["C4", "Eb4", "G4"]);
-        
-        // Play all selected notes simultaneously
-        const notesToPlay = Array.from(selectedNotes);
-        if (notesToPlay.length > 0) {
-            synth.triggerAttackRelease(notesToPlay, "2n");
-        }
-
         // Clear previous highlights
-        clearKeyHighlights(pianoType + '-piano');
-        
-        // Check each selected note and highlight incorrect ones
-        let allCorrect = true;
-        selectedNotes.forEach(note => {
-            if (!correctChord.has(note)) {
-                // Highlight incorrect key in red
-                $(`#${pianoType}-piano [data-note="${note}"]`).addClass('incorrect');
-                allCorrect = false;
-            }
-        });
+        document.querySelectorAll('#interval-piano .white-key, #interval-piano .black-key')
+            .forEach(key => key.classList.remove('highlight'));
 
-        // Highlight missing correct notes
-        correctChord.forEach(note => {
-            if (!selectedNotes.has(note)) {
-                // Highlight missing key in green
-                $(`#${pianoType}-piano [data-note="${note}"]`).addClass('correct');
-                allCorrect = false;
-            }
+        // Highlight and play first note
+        const firstKey = document.querySelector(`#interval-piano [data-note="${notes[0]}"]`);
+        firstKey.classList.add('highlight');
+        synth.triggerAttackRelease(notes[0], "4n");
+
+        // After delay, highlight and play second note
+        setTimeout(() => {
+            const secondKey = document.querySelector(`#interval-piano [data-note="${notes[1]}"]`);
+            secondKey.classList.add('highlight');
+            synth.triggerAttackRelease(notes[1], "4n");
+
+            // Remove highlights after a moment
+            setTimeout(() => {
+                firstKey.classList.remove('highlight');
+                secondKey.classList.remove('highlight');
+            }, 1000);
+        }, 500);
+    }
+
+    async function playChord(notes) {
+        await Tone.start();
+        notes.forEach(note => {
+            synth.triggerAttackRelease(note, "2n");
         });
-        
-        // Show feedback
-        const feedback = allCorrect ? 
-            "✅ Perfect! That's the correct chord!" : 
-            "❌ Not quite. Red keys are incorrect, green keys show the correct notes.";
-        
-        // Show feedback
-        $(this).closest('.controls').find('.chord-feedback').html(feedback);
-    });
+    }
+
+    function arraysEqual(a, b) {
+        return a.length === b.length && a.every((val, index) => val === b[index]);
+    }
 
     // Submit chord (for lesson 4)
     $('#submit-chord').click(function() {

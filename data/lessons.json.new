@@ -10,14 +10,24 @@
     "lesson": 2,
     "title": "Piano Intervals: The Building Blocks",
     "content": "Intervals are the distances between notes on the piano. There are two basic types of intervals: half-steps and whole-steps. A half-step is the distance from one key to the very next key (like C to C♯). A whole-step is equal to two half-steps (like C to D). Click the buttons below to hear the difference between a half-step and a whole-step!",
-    "type": "interactive"
+    "type": "interactive",
+    "intervals": {
+      "halfStep": {
+        "notes": ["C4", "C#4"],
+        "title": "Half Step"
+      },
+      "wholeStep": {
+        "notes": ["C4", "D4"],
+        "title": "Whole Step"
+      }
+    }
   },
   {
     "lesson": 3,
     "title": "What is a Piano Chord?",
     "content": "A chord happens when you play multiple notes at the same time. The most common type is a triad - a three-note chord. Every chord starts with a root note (the note that gives the chord its name), and adds other notes above it. Below you can see and hear the difference between major and minor chords. A major chord uses a whole step between the first two notes, while a minor chord uses a half step.",
     "type": "interactive",
-    "chords": {
+    "diagrams": {
       "major": {
         "notes": ["C4", "E4", "G4"],
         "title": "C Major Chord"
@@ -30,17 +40,17 @@
   },
   {
     "lesson": 4,
-    "title": "Playing Basic Triads",
-    "content": "Let's practice playing triads! A simple way to play a triad is to place your thumb on the root note, your middle finger on the third note (4 half-steps up for major, 3 half-steps for minor), and your pinky on the fifth note (7 half-steps up from root). Try playing the G major and G minor chords below. Click the keys to hear how they sound!",
+    "title": "Practice Building Chords",
+    "content": "Now it's your turn! Try building both C major and C minor chords. For C major, you'll need C + E + G. For C minor, you'll need C + Eb + G. Click the keys to select them, and we'll let you know if you've got it right!",
     "type": "interactive",
     "chords": {
       "major": {
-        "notes": ["G4", "B4", "D5"],
-        "title": "G Major Triad"
+        "notes": ["C4", "E4", "G4"],
+        "title": "Build C Major"
       },
       "minor": {
-        "notes": ["G4", "Bb4", "D5"],
-        "title": "G Minor Triad"
+        "notes": ["C4", "Eb4", "G4"],
+        "title": "Build C Minor"
       }
     }
   }

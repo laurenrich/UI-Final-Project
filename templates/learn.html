@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-fluid px-4">
+    <div class="row">
+        <div class="col-12">
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h2>{{ lesson_data.title }}</h2>
@@ -38,6 +38,9 @@
                             <div class="key-container">
                                 <div class="white-key" data-note="B4">B</div>
                             </div>
+                            <div class="key-container">
+                                <div class="white-key" data-note="C5">C</div>
+                            </div>
                         </div>
                         <div class="controls text-center mt-4">
                             <button id="play-scale" class="btn btn-success me-2">Play C Major Scale</button>
@@ -46,11 +49,34 @@
                     {% endif %}
 
                     {% if lesson_data.lesson == 2 %}
+                    <!-- Interval Demo -->
+                    <div class="piano-container mb-4">
+                        <div id="interval-piano" class="d-flex justify-content-center">
+                            <div class="key-container">
+                                <div class="white-key" data-note="C4">C</div>
+                                <div class="black-key" data-note="C#4"></div>
+                            </div>
+                            <div class="key-container">
+                                <div class="white-key" data-note="D4">D</div>
+                                <div class="black-key" data-note="D#4"></div>
+                            </div>
+                            <div class="key-container">
+                                <div class="white-key" data-note="E4">E</div>
+                            </div>
+                        </div>
+                        <div class="controls text-center mt-4">
+                            <button id="play-half-step" class="btn btn-primary me-2">Play Half Step (C to C♯)</button>
+                            <button id="play-whole-step" class="btn btn-primary">Play Whole Step (C to D)</button>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if lesson_data.lesson == 3 %}
                     <!-- Chord Diagrams -->
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="chord-diagram text-center p-3 border rounded">
-                                <h4>{{ lesson_data.diagrams.major.title }}</h4>
+                                <h4>{{ lesson_data.chords.major.title }}</h4>
                                 <div class="piano-container">
                                     <div class="d-flex justify-content-center">
                                         <div class="key-container">
@@ -74,11 +100,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-primary play-chord" data-piano="major">Play C Major Chord</button>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="chord-diagram text-center p-3 border rounded">
-                                <h4>{{ lesson_data.diagrams.minor.title }}</h4>
+                                <h4>{{ lesson_data.chords.minor.title }}</h4>
                                 <div class="piano-container">
                                     <div class="d-flex justify-content-center">
                                         <div class="key-container">
@@ -102,120 +131,104 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-primary play-chord" data-piano="minor">Play C Minor Chord</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     {% endif %}
 
-                    {% if lesson_data.lesson == 3 %}
+                    {% if lesson_data.lesson == 4 %}
                     <!-- Interactive Chord Practice -->
                     <div class="row mb-4">
-                        <!-- C Major Piano -->
+                        <!-- G Major Piano -->
                         <div class="col-md-6">
                             <div class="chord-practice text-center p-3 border rounded">
-                                <h4>C Major Chord</h4>
+                                <h4>Build a G Major Chord</h4>
                                 <div class="piano-container">
                                     <div id="major-piano" class="d-flex justify-content-center">
                                         <div class="key-container">
-                                            <div class="white-key" data-note="C4">C</div>
-                                            <div class="black-key" data-note="C#4"></div>
-                                        </div>
-                                        <div class="key-container">
-                                            <div class="white-key" data-note="D4">D</div>
-                                            <div class="black-key" data-note="D#4"></div>
-                                        </div>
-                                        <div class="key-container">
-                                            <div class="white-key" data-note="E4">E</div>
-                                        </div>
-                                        <div class="key-container">
-                                            <div class="white-key" data-note="F4">F</div>
-                                            <div class="black-key" data-note="F#4"></div>
-                                        </div>
-                                        <div class="key-container">
                                             <div class="white-key" data-note="G4">G</div>
                                             <div class="black-key" data-note="G#4"></div>
                                         </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="A4">A</div>
+                                            <div class="black-key" data-note="A#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="B4">B</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="C5">C</div>
+                                            <div class="black-key" data-note="C#5"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="D5">D</div>
+                                            <div class="black-key" data-note="D#5"></div>
+                                        </div>
                                     </div>
-                                    <div class="controls text-center mt-3">
-                                        <button class="play-chord btn btn-success" data-piano="major">Play Chord</button>
+                                    <div class="chord-feedback-container">
                                         <p class="chord-feedback mt-2"></p>
                                     </div>
                                 </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-success check-chord" data-piano="major">Check Chord</button>
+                                </div>
                             </div>
                         </div>
-                        <!-- C Minor Piano -->
+                        <!-- G Minor Piano -->
                         <div class="col-md-6">
                             <div class="chord-practice text-center p-3 border rounded">
-                                <h4>C Minor Chord</h4>
+                                <h4>Build a G Minor Chord</h4>
                                 <div class="piano-container">
                                     <div id="minor-piano" class="d-flex justify-content-center">
                                         <div class="key-container">
-                                            <div class="white-key" data-note="C4">C</div>
-                                            <div class="black-key" data-note="C#4"></div>
-                                        </div>
-                                        <div class="key-container">
-                                            <div class="white-key" data-note="D4">D</div>
-                                            <div class="black-key" data-note="Eb4">Eb</div>
-                                        </div>
-                                        <div class="key-container">
-                                            <div class="white-key" data-note="E4">E</div>
-                                        </div>
-                                        <div class="key-container">
-                                            <div class="white-key" data-note="F4">F</div>
-                                            <div class="black-key" data-note="F#4"></div>
-                                        </div>
-                                        <div class="key-container">
                                             <div class="white-key" data-note="G4">G</div>
                                             <div class="black-key" data-note="G#4"></div>
                                         </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="A4">A</div>
+                                            <div class="black-key" data-note="Bb4">Bb</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="B4">B</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="C5">C</div>
+                                            <div class="black-key" data-note="C#5"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="D5">D</div>
+                                            <div class="black-key" data-note="D#5"></div>
+                                        </div>
                                     </div>
-                                    <div class="controls text-center mt-3">
-                                        <button class="play-chord btn btn-success" data-piano="minor">Play Chord</button>
+                                    <div class="chord-feedback-container">
                                         <p class="chord-feedback mt-2"></p>
                                     </div>
+                                </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-success check-chord" data-piano="minor">Check Chord</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {% endif %}
 
-                    {% if lesson_data.type == "interactive" and lesson_data.lesson == 4 %}
-                    <!-- Interactive Piano -->
-                    <div class="piano-container mb-4">
-                        <div id="chord-piano" class="d-flex justify-content-center">
-                            <div class="key-container">
-                                <div class="white-key" data-note="G4">G</div>
-                                <div class="black-key" data-note="G#4"></div>
-                            </div>
-                            <div class="key-container">
-                                <div class="white-key" data-note="A4">A</div>
-                                <div class="black-key" data-note="A#4"></div>
-                            </div>
-                            <div class="key-container">
-                                <div class="white-key" data-note="B4">B</div>
-                            </div>
-                            <div class="key-container">
-                                <div class="white-key" data-note="C5">C</div>
-                                <div class="black-key" data-note="C#5"></div>
-                            </div>
-                            <div class="key-container">
-                                <div class="white-key" data-note="D5">D</div>
-                                <div class="black-key" data-note="D#5"></div>
-                            </div>
-                        </div>
-                        <div class="controls text-center mt-4">
-                            <button id="submit-chord" class="btn btn-primary">Check Chord</button>
-                            <p id="chord-feedback" class="mt-2"></p>
-                        </div>
-                    </div>
-                    {% endif %}
+                    <div class="d-flex justify-content-between mt-4">
+                        {% if lesson_data.lesson > 1 %}
+                            <a class="btn btn-outline-secondary" href="/learn/{{ lesson_data.lesson - 1 }}">Previous</a>
+                        {% else %}
+                            <a class="btn btn-outline-secondary" href="/" disabled>Previous</a>
+                        {% endif %}
 
-                    {% set next_lesson = lesson_data.lesson + 1 %}
-                    {% if next_lesson > 4 %}
-                    <a class="btn btn-success mt-4" href="/quiz/1">Go to Quiz</a>
-                    {% else %}
-                    <a class="btn btn-secondary mt-4" href="/learn/{{ next_lesson }}">Next</a>
-                    {% endif %}
+                        {% set next_lesson = lesson_data.lesson + 1 %}
+                        {% if next_lesson > 4 %}
+                            <a class="btn btn-success" href="/quiz/1">Go to Quiz</a>
+                        {% else %}
+                            <a class="btn btn-primary" href="/learn/{{ next_lesson }}">Next</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
