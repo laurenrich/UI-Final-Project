@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, redirect
+from flask import Flask, render_template, request, jsonify, redirect, send_file
+import os
 
 app = Flask(__name__)
 
@@ -11,8 +12,9 @@ def load_quiz_data():
     with open("data/quiz.json") as f:
         return json.load(f)
 
-with open("data/lessons.json") as f:
-    lessons = json.load(f)
+def load_lessons_data():
+    with open("data/lessons.json") as f:
+        return json.load(f)
 
 @app.route("/")
 def index():
@@ -23,7 +25,10 @@ def index():
 
 @app.route("/learn/<int:n>")
 def learn(n):
+    lessons = load_lessons_data()
     lesson_data = next((item for item in lessons if item["lesson"] == n), None)
+    if lesson_data is None:
+        return redirect("/")
     return render_template("learn.html", lesson_data=lesson_data)
 
 @app.route("/quiz/<int:n>", methods=["GET", "POST"])
@@ -60,6 +65,11 @@ def result():
     total_questions = len(load_quiz_data())  # Get actual number of questions
     score = sum(1 for q in quiz_answers if q["correct"])
     return render_template("result.html", score=score, total=total_questions)
+
+@app.route('/audio/<path:filename>')
+def serve_audio(filename):
+    audio_dir = os.path.expanduser('~/Desktop/UI Songs')
+    return send_file(os.path.join(audio_dir, filename))
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

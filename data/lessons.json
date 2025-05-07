@@ -8,40 +8,46 @@
   },
   {
     "lesson": 2,
-    "title": "Piano Intervals: The Building Blocks",
-    "content": "Intervals are the distances between notes on the piano. There are two basic types of intervals: half-steps and whole-steps. A half-step is the distance from one key to the very next key (like C to C♯). A whole-step is equal to two half-steps (like C to D). Click the buttons below to hear the difference between a half-step and a whole-step!",
-    "type": "interactive"
+    "title": "Understanding Intervals",
+    "content": "Intervals are the distances between notes. The smallest interval is a half step (from one key to the very next key, including black keys). A whole step is two half steps. Try playing both to hear the difference!"
   },
   {
     "lesson": 3,
-    "title": "What is a Piano Chord?",
-    "content": "A chord happens when you play multiple notes at the same time. The most common type is a triad - a three-note chord. Every chord starts with a root note (the note that gives the chord its name), and adds other notes above it. Below you can see and hear the difference between major and minor chords. A major chord uses a whole step between the first two notes, while a minor chord uses a half step.",
-    "type": "interactive",
+    "title": "Building Chords",
+    "content": "A chord is built by playing three or more notes together. The most common chords are built using three notes: the root (starting note), the third (3rd note up), and the fifth (5th note up). The difference between major and minor chords lies in the third - major chords use a major third (4 half steps up), while minor chords use a minor third (3 half steps up). Let's look at C major and C minor chords. In C major, we use C (root) + E (major 3rd) + G (5th). In C minor, we use C (root) + Eb (minor 3rd) + G (5th). Click the buttons to hear how they sound!",
     "chords": {
       "major": {
         "notes": ["C4", "E4", "G4"],
-        "title": "C Major Chord"
+        "title": "C Major"
       },
       "minor": {
         "notes": ["C4", "Eb4", "G4"],
-        "title": "C Minor Chord"
+        "title": "C Minor"
       }
     }
   },
   {
     "lesson": 4,
-    "title": "Playing Basic Triads",
-    "content": "Let's practice playing triads! A simple way to play a triad is to place your thumb on the root note, your middle finger on the third note (4 half-steps up for major, 3 half-steps for minor), and your pinky on the fifth note (7 half-steps up from root). Try playing the G major and G minor chords below. Click the keys to hear how they sound!",
-    "type": "interactive",
+    "title": "Build Your Own Chords",
+    "content": "Now it's your turn! Try to build G major and G minor chords. For G major, use G (root) + B (major 3rd) + D (5th). For G minor, use G (root) + Bb (minor 3rd) + D (5th). Click the keys to select them, then check if you've built the chord correctly.",
     "chords": {
       "major": {
         "notes": ["G4", "B4", "D5"],
-        "title": "G Major Triad"
+        "title": "G Major"
       },
       "minor": {
         "notes": ["G4", "Bb4", "D5"],
         "title": "G Minor Triad"
       }
+    }
+  },
+  {
+    "lesson": 5,
+    "title": "Major vs Minor: The Emotional Color of Music",
+    "content": "Major and minor chords create different emotional responses in music. Major chords often sound bright, happy, and uplifting, while minor chords tend to sound more melancholic, mysterious, or sad. Many songs use this to set their emotional tone. Famous examples in major key include 'Hey Jude' by The Beatles and 'Don't Stop Believin'' by Journey. Well-known minor key songs include 'Nothing Else Matters' by Metallica and 'Eleanor Rigby' by The Beatles. Let's hear the difference with 'A Whole New World' from Aladdin played in both major (original) and minor keys. Click the buttons below to hear how the same melody can create completely different emotional experiences!",
+    "audio": {
+      "major": "Disney's Aladdin - A Whole New World (Piano Cover).mp3",
+      "minor": "Have You Ever Heard A Whole New World in MINOR KEY_.mp3"
     }
   }
 ]

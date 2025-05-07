@@ -215,6 +215,36 @@
                     </div>
                     {% endif %}
 
+                    {% if lesson_data.lesson == 5 %}
+                    <!-- Major vs Minor Audio Examples -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Original (Major Key)</h5>
+                                    <p class="card-text">Listen to "A Whole New World" in its original major key:</p>
+                                    <audio id="major-song" controls>
+                                        <source src="{{ url_for('serve_audio', filename='Disney\'s Aladdin - A Whole New World (Piano Cover).mp3') }}" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Minor Key Version</h5>
+                                    <p class="card-text">Now hear how it sounds in minor key:</p>
+                                    <audio id="minor-song" controls>
+                                        <source src="{{ url_for('serve_audio', filename='Have You Ever Heard A Whole New World in MINOR KEY_.mp3') }}" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
                     <div class="d-flex justify-content-between mt-4">
                         {% if lesson_data.lesson > 1 %}
                             <a class="btn btn-outline-secondary" href="/learn/{{ lesson_data.lesson - 1 }}">Previous</a>
@@ -223,7 +253,7 @@
                         {% endif %}
 
                         {% set next_lesson = lesson_data.lesson + 1 %}
-                        {% if next_lesson > 4 %}
+                        {% if next_lesson > 5 %}
                             <a class="btn btn-success" href="/quiz/1">Go to Quiz</a>
                         {% else %}
                             <a class="btn btn-primary" href="/learn/{{ next_lesson }}">Next</a>
