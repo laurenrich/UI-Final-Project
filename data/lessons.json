@@ -46,8 +46,8 @@
     "title": "Major vs Minor: The Emotional Color of Music",
     "content": "Major and minor chords create different emotional responses in music. Major chords often sound bright, happy, and uplifting, while minor chords tend to sound more melancholic, mysterious, or sad. Many songs use this to set their emotional tone. Famous examples in major key include 'Hey Jude' by The Beatles and 'Don't Stop Believin'' by Journey. Well-known minor key songs include 'Nothing Else Matters' by Metallica and 'Eleanor Rigby' by The Beatles. Let's hear the difference with 'A Whole New World' from Aladdin played in both major (original) and minor keys. Click the buttons below to hear how the same melody can create completely different emotional experiences!",
     "audio": {
-      "major": "Disney's Aladdin - A Whole New World (Piano Cover).mp3",
-      "minor": "Have You Ever Heard A Whole New World in MINOR KEY_.mp3"
+      "major": "whole_new_world_major.mp3",
+      "minor": "whole_new_world_minor.mp3"
     }
   }
 ]

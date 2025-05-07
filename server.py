@@ -66,10 +66,5 @@ def result():
     score = sum(1 for q in quiz_answers if q["correct"])
     return render_template("result.html", score=score, total=total_questions)
 
-@app.route('/audio/<path:filename>')
-def serve_audio(filename):
-    audio_dir = os.path.expanduser('~/Desktop/UI Songs')
-    return send_file(os.path.join(audio_dir, filename))
-
 if __name__ == "__main__":
     app.run(debug=True, port=5001)

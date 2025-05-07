@@ -224,7 +224,7 @@
                                     <h5 class="card-title">Original (Major Key)</h5>
                                     <p class="card-text">Listen to "A Whole New World" in its original major key:</p>
                                     <audio id="major-song" controls>
-                                        <source src="{{ url_for('serve_audio', filename='Disney\'s Aladdin - A Whole New World (Piano Cover).mp3') }}" type="audio/mpeg">
+                                        <source src="{{ url_for('static', filename='audio/' + lesson_data.audio.major) }}" type="audio/mpeg">
                                         Your browser does not support the audio element.
                                     </audio>
                                 </div>
@@ -236,7 +236,7 @@
                                     <h5 class="card-title">Minor Key Version</h5>
                                     <p class="card-text">Now hear how it sounds in minor key:</p>
                                     <audio id="minor-song" controls>
-                                        <source src="{{ url_for('serve_audio', filename='Have You Ever Heard A Whole New World in MINOR KEY_.mp3') }}" type="audio/mpeg">
+                                        <source src="{{ url_for('static', filename='audio/' + lesson_data.audio.minor) }}" type="audio/mpeg">
                                         Your browser does not support the audio element.
                                     </audio>
                                 </div>
