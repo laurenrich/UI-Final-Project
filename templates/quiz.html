@@ -8,7 +8,7 @@
 
 <h2>{{ question_data.prompt }}</h2>
 
-{% if question_data.type == 'piano' %}
+{% if question_data.type == 'piano' or question_data.highlight_notes %}
 <div class="piano-container mb-4">
     <div id="piano" class="d-flex justify-content-center">
         <div class="key-container">
@@ -39,7 +39,9 @@
         </div>
     </div>
 </div>
-{% else %}
+{% endif %}
+
+{% if question_data.type == 'multiple_choice' %}
 <div class="options-container mb-4">
     <div class="d-grid gap-2 col-md-6 mx-auto">
         {% for option in question_data.options %}
@@ -54,14 +56,17 @@
     {% if question_data.type == 'piano' %}
     <button id="submit-btn" class="btn btn-primary">Submit Answer</button>
     {% endif %}
+    <button id="next-question-btn" class="btn btn-info" style="display:none;">Next Question</button>
 </div>
 
 <div id="feedback" class="text-center mt-3"></div>
 
 <script>
     window.questionNumber = {{ question_data.question }};
+    window.totalQuestions = {{ total_questions }};
     window.correctNotes = {{ question_data.answer|tojson|safe }};
     window.questionType = "{{ question_data.type }}";
+    window.highlight_notes = {{ question_data.highlight_notes|default(false)|tojson|safe }};
     {% if question_data.type == 'multiple_choice' %}
     window.correctOption = "{{ question_data.correct_option }}";
     {% endif %}

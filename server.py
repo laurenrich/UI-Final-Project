@@ -28,6 +28,11 @@ def learn(n):
 
 @app.route("/quiz/<int:n>", methods=["GET", "POST"])
 def quiz(n):
+    global quiz_answers
+    # If it's the first question and a GET request, reset session answers
+    if n == 1 and request.method == "GET":
+        quiz_answers = []
+    
     # Reload quiz data on each request to ensure latest version
     quizzes = load_quiz_data()
     question_data = next((item for item in quizzes if item["question"] == n), None)

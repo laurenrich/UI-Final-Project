@@ -30,5 +30,14 @@
     "prompt": "Play an E Minor chord. Select the three notes that make up the chord.",
     "type": "piano",
     "answer": ["E4", "G4", "B4"]
+  },
+  {
+    "question": 6,
+    "prompt": "What chord is displayed on the piano?",
+    "type": "multiple_choice",
+    "options": ["C Major", "G Major", "E Minor", "D Major"],
+    "correct_option": "G Major",
+    "answer": ["G4", "B4", "D4"],
+    "highlight_notes": true
   }
 ]

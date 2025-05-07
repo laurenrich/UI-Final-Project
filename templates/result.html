@@ -1,7 +1,98 @@
 {% extends "layout.html" %}
 {% block content %}
-<h2>🎉 You Finished!</h2>
-<p>Your final score: <strong>{{ score }} / {{ total }}</strong></p>
-<p>Thanks for playing! You're on your way to becoming a chord master 🎹</p>
-<a class="btn btn-primary" href="/">Back to Home</a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card text-center shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2>🎉 Quiz Completed! 🎉</h2>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">Your Performance</h3>
+                    <p class="display-4 text-center">{{ score }} <span class="text-muted">/ {{ total }}</span></p>
+                    
+                    {% set percentage = (score / total * 100) if total > 0 else 0 %}
+                    
+                    <div class="circular-progress-container mb-3">
+                        <svg width="150" height="150" viewBox="0 0 100 100" class="circular-progress">
+                            <circle class="progress-background" cx="50" cy="50" r="45"></circle>
+                            <circle class="progress-bar-circle" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <div class="progress-text">{{ percentage|round|int }}%</div>
+                    </div>
+
+                    {% if percentage == 100 %}
+                        <p class="lead">🏆 Perfect Score! You're a true chord master! 🏆</p>
+                    {% elif percentage >= 75 %}
+                        <p class="lead">👍 Excellent work! You have a great understanding. 👍</p>
+                    {% elif percentage >= 50 %}
+                        <p class="lead">😊 Good job! Keep practicing to improve. 😊</p>
+                    {% else %}
+                        <p class="lead">💪 Don't give up! Review the lessons and try again. 💪</p>
+                    {% endif %}
+                    
+                    <p>Thanks for playing! Keep up the great work. 🎹</p>
+                    
+                    <style>
+                        .circular-progress-container {
+                            position: relative;
+                            width: 150px; /* SVG width */
+                            height: 150px; /* SVG height */
+                            margin: 20px auto; /* Center container */
+                        }
+                        .circular-progress circle {
+                            fill: none;
+                            stroke-width: 8; /* Thickness of the circle */
+                        }
+                        .progress-background {
+                            stroke: #f0f0f0; /* Lighter grey track */
+                        }
+                        .progress-bar-circle {
+                            stroke: #28a745; /* Green progress, matches Bootstrap success */
+                            stroke-linecap: round;
+                            transform-origin: 50% 50%;
+                            transform: rotate(-90deg); /* Start from top */
+                            transition: stroke-dashoffset 0.8s ease-in-out;
+                        }
+                        .progress-text {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            font-size: 1.8em; /* Slightly larger text */
+                            font-weight: bold;
+                            color: #333; /* Darker text for contrast */
+                        }
+                    </style>
+                    
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const progressBarCircle = document.querySelector('.circular-progress .progress-bar-circle');
+                            if (progressBarCircle) { // Check if element exists
+                                const radius = progressBarCircle.r.baseVal.value;
+                                const circumference = 2 * Math.PI * radius;
+                                let percentageValue = parseFloat({{ percentage|default(0) }});
+                                if (isNaN(percentageValue)) {
+                                    percentageValue = 0;
+                                }
+
+                                progressBarCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+                                
+                                const offset = circumference - (percentageValue / 100) * circumference;
+                                // Timeout to allow transition to be visible after page load and DOM calculation
+                                setTimeout(() => {
+                                   progressBarCircle.style.strokeDashoffset = offset;
+                                }, 100); // Small delay
+                            }
+                        });
+                    </script>
+                </div>
+                <div class="card-footer text-muted">
+                    <a href="/quiz/1" class="btn btn-info me-2">Try Again</a>
+                    <a href="/" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

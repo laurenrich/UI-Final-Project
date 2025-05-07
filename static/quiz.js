@@ -3,7 +3,14 @@ $(document).ready(function () {
     const synth = new Tone.Synth().toDestination();
     let selectedNotes = new Set();
     let selectedOption = null;
-    
+
+    // Highlight notes if needed
+    if (window.highlight_notes && window.correctNotes) {
+        window.correctNotes.forEach(note => {
+            $(`.white-key[data-note="${note}"], .black-key[data-note="${note}"]`).addClass('highlight');
+        });
+    }
+        
     // Handle piano key clicks for piano questions
     $('.white-key, .black-key').click(function() {
         if (window.questionType !== 'piano') return;
@@ -70,10 +77,10 @@ $(document).ready(function () {
                 correct: correct
             }),
             success: function() {
-                // Wait 2 seconds before moving to next question
-                setTimeout(() => {
-                    window.location.href = `/quiz/${questionNumber + 1}`;
-                }, 2000);
+                // Show next question button
+                $('#next-question-btn').show();
+                // Disable option buttons
+                $('.option-btn').prop('disabled', true);
             }
         });
     }
@@ -122,12 +129,23 @@ $(document).ready(function () {
                 correct: correct
             }),
             success: function() {
-                // Wait 3 seconds before moving to next question
-                setTimeout(() => {
-                    window.location.href = `/quiz/${questionNumber + 1}`;
-                }, 3000);
+                // Show next question button
+                $('#next-question-btn').show();
+                // Disable piano keys and submit button
+                $('.white-key, .black-key').css('pointer-events', 'none').removeClass('selected');
+                $('#submit-btn').prop('disabled', true);
             }
         });
+    });
+
+
+    // Handler for the new Next Question button
+    $('#next-question-btn').click(function() {
+        if (window.questionNumber >= window.totalQuestions) {
+            window.location.href = '/result'; // Navigate to results page if last question
+        } else {
+            window.location.href = `/quiz/${window.questionNumber + 1}`;
+        }
     });
 });
 
