@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Initialize Tone.js synth
-    const synth = new Tone.Synth().toDestination();
+    const synth = new Tone.PolySynth(Tone.Synth).toDestination();
     let selectedNotes = new Set();
     let selectedOption = null;
 
@@ -45,15 +45,12 @@ $(document).ready(function () {
     
     // Play button - plays the correct chord
     $('#play-btn').click(async function() {
-        // Need to start audio context on user gesture
         await Tone.start();
         
-        // Play each note in the chord with a slight delay
-        window.correctNotes.forEach((note, index) => {
-            setTimeout(() => {
-                synth.triggerAttackRelease(note, "4n");
-            }, index * 200);
-        });
+        // Play all notes in the chord simultaneously
+        if (window.correctNotes && window.correctNotes.length > 0) {
+            synth.triggerAttackRelease(window.correctNotes, "1n");
+        }
     });
 
     function submitMultipleChoiceAnswer() {
