@@ -53,26 +53,24 @@
   {
     "lesson": 6,
     "title": "Taylor Swift Chord Progressions",
-    "content": "Many popular Taylor Swift songs use the same few chord progressions. In this lesson, we'll learn how four simple chords - C major, G major, A minor, and F major - can be used to play numerous Taylor Swift songs. Try playing each chord and notice how they sound together. These chord progressions create the foundation for many of her hit songs!",
-    "video": "Taylor Swift.mp4",
-    "videoStart": 716,
-    "videoEnd": 836,
+    "content": "Many popular Taylor Swift songs use the same few chord progressions. In this lesson, we'll learn how four simple chords - G major, D major, A minor, and C major - can be used to play numerous Taylor Swift songs. Try playing each chord and notice how they sound together. These chord progressions create the foundation for many of her hit songs!",
+    "video": "TSMusic.mp4",
     "chords": {
-      "c_major": {
-        "notes": ["C4", "E4", "G4"],
-        "title": "C Major"
-      },
       "g_major": {
         "notes": ["G4", "B4", "D5"],
         "title": "G Major"
+      },
+      "d_major": {
+        "notes": ["D4", "F#4", "A4"],
+        "title": "D Major"
       },
       "a_minor": {
         "notes": ["A4", "C5", "E5"],
         "title": "A Minor"
       },
-      "f_major": {
-        "notes": ["F4", "A4", "C5"],
-        "title": "F Major"
+      "c_major": {
+        "notes": ["C4", "E4", "G4"],
+        "title": "C Major"
       }
     }
   },

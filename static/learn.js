@@ -218,10 +218,10 @@ $(document).ready(function () {
     const chordNotes = {
         // Taylor Swift chords
         'taylor': {
-            'c_major': ['C4', 'E4', 'G4'],
             'g_major': ['G4', 'B4', 'D5'],
-            'a_minor': ['A4', 'C5', 'E5'],
-            'f_major': ['F4', 'A4', 'C5']
+            'd_major': ['D4', 'F#4', 'A4'],
+            'a_minor': ['A3', 'C4', 'E4'],
+            'c_major': ['C4', 'E4', 'G4']
         },
         // Beyoncé chords
         'beyonce': {
