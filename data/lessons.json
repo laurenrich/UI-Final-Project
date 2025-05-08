@@ -99,25 +99,48 @@
   },
   {
     "lesson": 8,
-    "title": "Playing Along with Beyoncé's Halo",
-    "content": "Beyoncé's hit song 'Halo' uses a beautiful chord progression that creates its emotional atmosphere. In this lesson, we'll learn how to play the four main chords used in this song: G major, A minor, E minor, and C major. Practice playing along with the video and try to match the rhythm of the chord changes.",
-    "video": "Helo - Beyoncé - Chords.mp4",
+    "title": "Build Beyoncé's Halo Chord Progression",
+    "content": "Beyoncé's hit song 'Halo' uses a beautiful chord progression that creates its emotional atmosphere. In this lesson, we'll practice building the four main chords used in this song: A major, B minor, F# minor, and D major. Click the keys to select them, then check if you've built each chord correctly.",
     "chords": {
-      "g_major": {
-        "notes": ["G4", "B4", "D5"],
-        "title": "G Major"
+      "a_major": {
+        "notes": ["A3", "C#4", "E4"],
+        "title": "A Major"
       },
-      "a_minor": {
-        "notes": ["A4", "C5", "E5"],
-        "title": "A Minor"
+      "b_minor": {
+        "notes": ["B3", "D4", "F#4"],
+        "title": "B Minor"
       },
-      "e_minor": {
-        "notes": ["E4", "G4", "B4"],
-        "title": "E Minor"
+      "f_sharp_minor": {
+        "notes": ["F#3", "A3", "C#4"],
+        "title": "F# Minor"
       },
-      "c_major": {
-        "notes": ["C4", "E4", "G4"],
-        "title": "C Major"
+      "d_major": {
+        "notes": ["D3", "F#3", "A3"],
+        "title": "D Major"
+      }
+    }
+  },
+  {
+    "lesson": 9,
+    "title": "Playing Along with Beyoncé's Halo",
+    "content": "Now that you've learned the chords, let's play along with Beyoncé's 'Halo'. This song uses A major, B minor, F# minor, and D major chords to create its emotional atmosphere. Practice playing along with the video and try to match the rhythm of the chord changes.",
+    "video": "Halo.mp4",
+    "chords": {
+      "a_major": {
+        "notes": ["A3", "C#4", "E4"],
+        "title": "A Major"
+      },
+      "b_minor": {
+        "notes": ["B3", "D4", "F#4"],
+        "title": "B Minor"
+      },
+      "f_sharp_minor": {
+        "notes": ["F#3", "A3", "C#4"],
+        "title": "F# Minor"
+      },
+      "d_major": {
+        "notes": ["D3", "F#3", "A3"],
+        "title": "D Major"
       }
     }
   }

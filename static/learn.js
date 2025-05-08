@@ -8,9 +8,37 @@ const sounds = {
   "B": "/static/audio/B.mp3"
 };
 
+// Pre-initialize Tone.js to avoid startup delay
+Tone.start();
+Tone.context.latencyHint = 'interactive';
+
+// Create synth outside document.ready to initialize early
+const synth = new Tone.PolySynth({
+    envelope: {
+        attack: 0.01,  // Faster attack time
+        decay: 0.5,
+        sustain: 0.3,
+        release: 1
+    }
+}).toDestination();
+
+// Preload common notes to minimize delay
+function preloadNotes() {
+    // Silently trigger notes to warm up the audio engine
+    const commonNotes = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+    synth.triggerAttackRelease(commonNotes, 0.01, Tone.now(), 0.0001); // Very quiet, almost silent
+}
+
+// Call preload when user interacts with the page
+window.addEventListener('click', function() {
+    if (!window.audioInitialized) {
+        preloadNotes();
+        window.audioInitialized = true;
+    }
+}, {once: true});
+
 $(document).ready(function () {
-    // Initialize Tone.js synth
-    const synth = new Tone.PolySynth().toDestination();
+    // Initialize sets for tracking selected notes
     let selectedNotesMajor = new Set();
     let selectedNotesMinor = new Set();
     let selectedNotes = new Set(); // for lesson 4
@@ -114,6 +142,81 @@ $(document).ready(function () {
             playChord(notes);
         });
     });
+
+    // Optimized playNote function with minimal delay
+    function playNote(note) {
+        // Use immediate scheduling for minimal latency
+        synth.triggerAttackRelease(note, "8n", Tone.now());
+    }
+    
+    // Optimized playScale function
+    function playScale() {
+        const scale = ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'];
+        let time = Tone.now();
+        const interval = 0.5;
+        
+        // Pre-schedule all notes at once for better timing
+        scale.forEach((note, index) => {
+            synth.triggerAttackRelease(note, "8n", time + index * interval);
+            
+            // Use requestAnimationFrame for smoother UI updates
+            const scheduleTime = performance.now() + (index * interval * 1000);
+            scheduleHighlight(note, scheduleTime, index === scale.length - 1);
+        });
+        
+        function scheduleHighlight(note, time, isLast) {
+            const currentTime = performance.now();
+            if (currentTime >= time) {
+                // Remove previous highlights
+                $('.white-key, .black-key').removeClass('highlight');
+                
+                // Add highlight to current note
+                $(`[data-note="${note}"]`).addClass('highlight');
+                
+                // Remove highlight after a short delay if it's the last note
+                if (isLast) {
+                    setTimeout(() => {
+                        $('.white-key, .black-key').removeClass('highlight');
+                    }, 500);
+                }
+            } else {
+                requestAnimationFrame(() => scheduleHighlight(note, time, isLast));
+            }
+        }
+    }
+    
+    // Optimized playInterval function
+    function playInterval(notes) {
+        let time = Tone.now();
+        const interval = 0.5;
+        
+        // Pre-schedule all notes at once
+        notes.forEach((note, index) => {
+            synth.triggerAttackRelease(note, "8n", time + index * interval);
+            
+            // Schedule UI updates
+            setTimeout(() => {
+                // Remove previous highlights
+                $('#interval-piano .white-key, #interval-piano .black-key').removeClass('highlight');
+                
+                // Add highlight to current note
+                $(`#interval-piano [data-note="${note}"]`).addClass('highlight');
+                
+                // Remove highlight after a short delay
+                if (index === notes.length - 1) {
+                    setTimeout(() => {
+                        $('#interval-piano .white-key, #interval-piano .black-key').removeClass('highlight');
+                    }, 500);
+                }
+            }, index * interval * 1000);
+        });
+    }
+    
+    // Optimized playChord function for minimal delay
+    function playChord(notes) {
+        // Use immediate scheduling and shorter duration for more responsive feel
+        synth.triggerAttackRelease(notes, "2n", Tone.now());
+    }
 
     async function playNote(note) {
         await Tone.start();
@@ -225,10 +328,10 @@ $(document).ready(function () {
         },
         // Beyoncé chords
         'beyonce': {
-            'g_major': ['G4', 'B4', 'D5'],
-            'a_minor': ['A4', 'C5', 'E5'],
-            'e_minor': ['E4', 'G4', 'B4'],
-            'c_major': ['C4', 'E4', 'G4']
+            'a_major': ['A3', 'C#4', 'E4'],
+            'b_minor': ['B3', 'D4', 'F#4'],
+            'f_sharp_minor': ['F#3', 'A3', 'C#4'],
+            'd_major': ['D3', 'F#3', 'A3']
         }
     };
     
@@ -314,20 +417,104 @@ $(document).ready(function () {
         const chordType = $(this).data('chord');
         const notes = chordNotes.taylor[chordType];
         
-        // Clear previous highlights and highlight new keys in one operation
-        const pianoKeys = $('#taylor-piano .white-key, #taylor-piano .black-key');
-        pianoKeys.removeClass('highlight');
+        // Start playing the chord immediately before UI updates
+        // This reduces perceived latency by prioritizing audio playback
+        synth.triggerAttackRelease(notes, "2n", Tone.now());
         
-        // Highlight the keys in the chord
-        notes.forEach(note => {
-            $(`#taylor-piano [data-note="${note}"]`).addClass('highlight');
+        // Use requestAnimationFrame for smoother UI updates
+        requestAnimationFrame(() => {
+            // Clear previous highlights
+            const pianoKeys = $('#taylor-piano .white-key, #taylor-piano .black-key');
+            pianoKeys.removeClass('highlight');
+            
+            // Highlight the keys in the chord
+            notes.forEach(note => {
+                $(`#taylor-piano [data-note="${note}"]`).addClass('highlight');
+            });
         });
-        
-        // Play the chord immediately
-        synth.triggerAttackRelease(notes, "2n");
     });
     
-    // Beyoncé Halo lesson functionality (lesson 7)
+    // Beyoncé chord building lesson functionality (lesson 8)
+    // Add click event listeners to piano keys for the Beyoncé chord building lesson
+    document.querySelectorAll('#beyonce-a-piano .white-key, #beyonce-a-piano .black-key, #beyonce-b-piano .white-key, #beyonce-b-piano .black-key, #beyonce-f-piano .white-key, #beyonce-f-piano .black-key, #beyonce-d-piano .white-key, #beyonce-d-piano .black-key').forEach(key => {
+        key.addEventListener('click', function() {
+            const note = this.dataset.note;
+            synth.triggerAttackRelease(note, "8n");
+            
+            // Track clicked keys for chord building
+            this.classList.toggle('selected');
+            // Remove incorrect/correct highlights when a new selection is made
+            this.classList.remove('incorrect', 'correct');
+        });
+    });
+    
+    // Event listeners for checking Beyoncé chords
+    document.querySelectorAll('.check-beyonce-chord').forEach(button => {
+        button.addEventListener('click', function() {
+            const chordType = this.dataset.chord;
+            let pianoId;
+            
+            // Determine which piano to use based on chord type
+            if (chordType === 'a_major') {
+                pianoId = 'beyonce-a-piano';
+            } else if (chordType === 'b_minor') {
+                pianoId = 'beyonce-b-piano';
+            } else if (chordType === 'f_sharp_minor') {
+                pianoId = 'beyonce-f-piano';
+            } else if (chordType === 'd_major') {
+                pianoId = 'beyonce-d-piano';
+            }
+            
+            const piano = document.getElementById(pianoId);
+            
+            // Clear previous highlights
+            piano.querySelectorAll('.white-key, .black-key').forEach(key => {
+                key.classList.remove('correct', 'incorrect');
+            });
+            
+            const selectedNotes = Array.from(piano.querySelectorAll('.selected'))
+                .map(key => key.dataset.note);
+            
+            const correctNotes = chordNotes.beyonce[chordType];
+            
+            const feedback = piano.closest('.chord-practice')
+                .querySelector('.chord-feedback');
+            
+            // Check each selected note
+            selectedNotes.forEach(note => {
+                const key = piano.querySelector(`[data-note="${note}"]`);
+                if (correctNotes.includes(note)) {
+                    key.classList.add('correct');
+                } else {
+                    key.classList.add('incorrect');
+                }
+            });
+            
+            // Highlight missing notes
+            correctNotes.forEach(note => {
+                if (!selectedNotes.includes(note)) {
+                    const key = piano.querySelector(`[data-note="${note}"]`);
+                    key.classList.add('correct');
+                }
+            });
+            
+            // Only play the selected notes
+            if (selectedNotes.length > 0) {
+                synth.triggerAttackRelease(selectedNotes, "2n");
+            }
+            
+            // Show feedback
+            if (arraysEqual(selectedNotes.sort(), correctNotes.sort())) {
+                feedback.textContent = 'Perfect! That\'s the correct chord!';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Not quite. The green keys show what you need. You can keep trying - just click keys to select or unselect them.';
+                feedback.style.color = 'red';
+            }
+        });
+    });
+    
+    // Beyoncé Halo video lesson functionality (lesson 9)
     const beyonceVideo = document.getElementById('beyonce-video');
     if (beyonceVideo) {
         // Auto-play when ready
@@ -341,17 +528,21 @@ $(document).ready(function () {
         const chordType = $(this).data('chord');
         const notes = chordNotes.beyonce[chordType];
         
-        // Clear previous highlights and highlight new keys in one operation
-        const pianoKeys = $('#beyonce-piano .white-key, #beyonce-piano .black-key');
-        pianoKeys.removeClass('highlight');
+        // Start playing the chord immediately before UI updates
+        // This reduces perceived latency by prioritizing audio playback
+        synth.triggerAttackRelease(notes, "2n", Tone.now());
         
-        // Highlight the keys in the chord
-        notes.forEach(note => {
-            $(`#beyonce-piano [data-note="${note}"]`).addClass('highlight');
+        // Use requestAnimationFrame for smoother UI updates
+        requestAnimationFrame(() => {
+            // Clear previous highlights
+            const pianoKeys = $('#beyonce-piano .white-key, #beyonce-piano .black-key');
+            pianoKeys.removeClass('highlight');
+            
+            // Highlight the keys in the chord
+            notes.forEach(note => {
+                $(`#beyonce-piano [data-note="${note}"]`).addClass('highlight');
+            });
         });
-        
-        // Play the chord immediately
-        synth.triggerAttackRelease(notes, "2n");
     });
 });
 

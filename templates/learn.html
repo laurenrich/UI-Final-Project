@@ -72,13 +72,23 @@
                     {% endif %}
 
                     {% if lesson_data.lesson == 3 %}
+                    <!-- Aladdin Video Section -->
+                    <div class="row mt-4 mb-4">
+                        <div class="col-12 text-center">
+                            <video id="aladdin-video" style="max-width: 60%; max-height: 300px;" muted>
+                                <source src="{{ url_for('static', filename='videos/Aladdin.mp4') }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                    
                     <!-- Major vs Minor Audio Examples -->
                     <div class="row mt-4">
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Major Key Version</h5>
-                                    <audio controls>
+                                    <audio id="major-audio" controls>
                                         <source src="{{ url_for('static', filename='audio/whole_new_world_major.mp3') }}" type="audio/mpeg">
                                         Your browser does not support the audio element.
                                     </audio>
@@ -89,7 +99,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Minor Key Version</h5>
-                                    <audio controls>
+                                    <audio id="minor-audio" controls>
                                         <source src="{{ url_for('static', filename='audio/whole_new_world_minor.mp3') }}" type="audio/mpeg">
                                         Your browser does not support the audio element.
                                     </audio>
@@ -97,6 +107,49 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Script for video-audio synchronization -->
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const aladdinVideo = document.getElementById('aladdin-video');
+                            const majorAudio = document.getElementById('major-audio');
+                            const minorAudio = document.getElementById('minor-audio');
+                            
+                            // Set the major audio to start at 7 seconds
+                            majorAudio.addEventListener('loadedmetadata', function() {
+                                this.currentTime = 7;
+                            });
+                            
+                            // Set video to start at 7 seconds when loaded
+                            aladdinVideo.addEventListener('loadedmetadata', function() {
+                                this.currentTime = 7;
+                            });
+                            
+                            // Play video when major audio plays
+                            majorAudio.addEventListener('play', function() {
+                                aladdinVideo.currentTime = 7; // Always start at 7 second mark
+                                aladdinVideo.play();
+                                minorAudio.pause(); // Pause the other audio if playing
+                            });
+                            
+                            // Pause video when major audio pauses
+                            majorAudio.addEventListener('pause', function() {
+                                aladdinVideo.pause();
+                            });
+                            
+                            // Play video when minor audio plays
+                            minorAudio.addEventListener('play', function() {
+                                aladdinVideo.currentTime = 7; // Always start at 7 second mark
+                                aladdinVideo.play();
+                                majorAudio.pause(); // Pause the other audio if playing
+                            });
+                            
+                            // Pause video when minor audio pauses
+                            minorAudio.addEventListener('pause', function() {
+                                aladdinVideo.pause();
+                            });
+                        });
+                    </script>
                     {% endif %}
 
                     {% if lesson_data.lesson == 4 %}
@@ -478,23 +531,204 @@
                     {% endif %}
 
                     {% if lesson_data.lesson == 8 %}
-                    <!-- Beyoncé Halo Chord Progression Lesson -->
+                    <!-- Build Beyoncé's Halo Chord Progression Lesson -->
                     <div class="row mb-4">
-                        <div class="col-md-6">
-                            <!-- Video Section (Left Side) -->
-                            <div class="video-container h-100 d-flex align-items-center justify-content-center">
-                                <video id="beyonce-video" style="width: 100%; max-height: 400px;" controls>
+                        <div class="col-12 mb-4">
+                            <p class="lead">Build each chord by clicking the correct keys on the piano. Then check your work with the "Check Chord" button.</p>
+                        </div>
+                        
+                        <!-- A Major Piano -->
+                        <div class="col-md-6 mb-4">
+                            <div class="chord-practice text-center p-3 border rounded">
+                                <h4>Build A Major Chord</h4>
+                                <div class="piano-container">
+                                    <div id="beyonce-a-piano" class="d-flex justify-content-center">
+                                        <!-- Simplified Keyboard -->
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="A4">A</div>
+                                            <div class="black-key" data-note="A#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="B4">B</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="C5">C</div>
+                                            <div class="black-key" data-note="C#5"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="D5">D</div>
+                                            <div class="black-key" data-note="D#5"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="E5">E</div>
+                                        </div>
+                                    </div>
+                                    <div class="chord-feedback-container">
+                                        <p class="chord-feedback mt-2"></p>
+                                    </div>
+                                </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-success check-beyonce-chord" data-chord="a_major">Check A Major Chord</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- B Minor Piano -->
+                        <div class="col-md-6 mb-4">
+                            <div class="chord-practice text-center p-3 border rounded">
+                                <h4>Build B Minor Chord</h4>
+                                <div class="piano-container">
+                                    <div id="beyonce-b-piano" class="d-flex justify-content-center">
+                                        <!-- Simplified Keyboard -->
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="B4">B</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="C5">C</div>
+                                            <div class="black-key" data-note="C#5"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="D5">D</div>
+                                            <div class="black-key" data-note="D#5"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="E5">E</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="F5">F</div>
+                                            <div class="black-key" data-note="F#5"></div>
+                                        </div>
+                                    </div>
+                                    <div class="chord-feedback-container">
+                                        <p class="chord-feedback mt-2"></p>
+                                    </div>
+                                </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-success check-beyonce-chord" data-chord="b_minor">Check B Minor Chord</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- F# Minor Piano -->
+                        <div class="col-md-6 mb-4">
+                            <div class="chord-practice text-center p-3 border rounded">
+                                <h4>Build F# Minor Chord</h4>
+                                <div class="piano-container">
+                                    <div id="beyonce-f-piano" class="d-flex justify-content-center">
+                                        <!-- Simplified Keyboard -->
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="E4">E</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="F4">F</div>
+                                            <div class="black-key" data-note="F#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="G4">G</div>
+                                            <div class="black-key" data-note="G#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="A4">A</div>
+                                            <div class="black-key" data-note="A#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="B4">B</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="C5">C</div>
+                                            <div class="black-key" data-note="C#5"></div>
+                                        </div>
+                                    </div>
+                                    <div class="chord-feedback-container">
+                                        <p class="chord-feedback mt-2"></p>
+                                    </div>
+                                </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-success check-beyonce-chord" data-chord="f_sharp_minor">Check F# Minor Chord</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- D Major Piano -->
+                        <div class="col-md-6 mb-4">
+                            <div class="chord-practice text-center p-3 border rounded">
+                                <h4>Build D Major Chord</h4>
+                                <div class="piano-container">
+                                    <div id="beyonce-d-piano" class="d-flex justify-content-center">
+                                        <!-- Simplified Keyboard -->
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="D4">D</div>
+                                            <div class="black-key" data-note="D#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="E4">E</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="F4">F</div>
+                                            <div class="black-key" data-note="F#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="G4">G</div>
+                                            <div class="black-key" data-note="G#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="A4">A</div>
+                                            <div class="black-key" data-note="A#4"></div>
+                                        </div>
+                                    </div>
+                                    <div class="chord-feedback-container">
+                                        <p class="chord-feedback mt-2"></p>
+                                    </div>
+                                </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-success check-beyonce-chord" data-chord="d_major">Check D Major Chord</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if lesson_data.lesson == 9 %}
+                    <!-- Beyoncé Halo Chord Progression in Action Lesson -->
+                    <div class="row mb-4">
+                        <!-- Video Section (Top) -->
+                        <div class="col-12 mb-4">
+                            <div class="video-container text-center">
+                                <video id="beyonce-video" style="max-width: 50%; max-height: 300px;" controls>
                                     <source src="{{ url_for('static', filename='videos/' + lesson_data.video) }}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                             </div>
                         </div>
                         
-                        <div class="col-md-6">
-                            <!-- Piano Section (Right Side) -->
+                        <!-- Piano Section (Bottom) -->
+                        <div class="col-12">
                             <div class="piano-container mb-4">
                                 <div id="beyonce-piano" class="d-flex justify-content-center">
-                                    <!-- First Octave -->
+                                    <!-- Lower Octave (3) -->
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="D3">D</div>
+                                        <div class="black-key" data-note="D#3"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="E3">E</div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="F3">F</div>
+                                        <div class="black-key" data-note="F#3"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="G3">G</div>
+                                        <div class="black-key" data-note="G#3"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="A3">A</div>
+                                        <div class="black-key" data-note="A#3"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="B3">B</div>
+                                    </div>
+                                    <!-- Middle Octave (4) -->
                                     <div class="key-container">
                                         <div class="white-key" data-note="C4">C</div>
                                         <div class="black-key" data-note="C#4"></div>
@@ -510,37 +744,14 @@
                                         <div class="white-key" data-note="F4">F</div>
                                         <div class="black-key" data-note="F#4"></div>
                                     </div>
-                                    <div class="key-container">
-                                        <div class="white-key" data-note="G4">G</div>
-                                        <div class="black-key" data-note="G#4"></div>
-                                    </div>
-                                    <div class="key-container">
-                                        <div class="white-key" data-note="A4">A</div>
-                                        <div class="black-key" data-note="A#4"></div>
-                                    </div>
-                                    <div class="key-container">
-                                        <div class="white-key" data-note="B4">B</div>
-                                    </div>
-                                    <!-- Second Octave -->
-                                    <div class="key-container">
-                                        <div class="white-key" data-note="C5">C</div>
-                                        <div class="black-key" data-note="C#5"></div>
-                                    </div>
-                                    <div class="key-container">
-                                        <div class="white-key" data-note="D5">D</div>
-                                        <div class="black-key" data-note="D#5"></div>
-                                    </div>
-                                    <div class="key-container">
-                                        <div class="white-key" data-note="E5">E</div>
-                                    </div>
                                 </div>
                                 
                                 <!-- Chord Buttons -->
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="g_major">G Major</button>
-                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="a_minor">A Minor</button>
-                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="e_minor">E Minor</button>
-                                    <button class="btn btn-primary play-beyonce-chord" data-chord="c_major">C Major</button>
+                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="a_major">A Major</button>
+                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="b_minor">B Minor</button>
+                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="f_sharp_minor">F# Minor</button>
+                                    <button class="btn btn-primary play-beyonce-chord" data-chord="d_major">D Major</button>
                                 </div>
                             </div>
                         </div>
@@ -555,7 +766,7 @@
                         {% endif %}
 
                         {% set next_lesson = lesson_data.lesson + 1 %}
-                        {% if next_lesson > 8 %}
+                        {% if next_lesson > 9 %}
                             <a class="btn btn-success" href="/quiz/1">Go to Quiz</a>
                         {% else %}
                             <a class="btn btn-primary" href="/learn/{{ next_lesson }}">Next</a>
