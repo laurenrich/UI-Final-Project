@@ -210,6 +210,89 @@ $(document).ready(function () {
         
         $('#chord-feedback').html(feedback);
     });
+    
+    // Pre-initialize Tone.js to eliminate startup delay
+    Tone.start();
+    
+    // Pre-define chord notes for all lessons to eliminate lookup time
+    const chordNotes = {
+        // Taylor Swift chords
+        'taylor': {
+            'c_major': ['C4', 'E4', 'G4'],
+            'g_major': ['G4', 'B4', 'D5'],
+            'a_minor': ['A4', 'C5', 'E5'],
+            'f_major': ['F4', 'A4', 'C5']
+        },
+        // Beyoncé chords
+        'beyonce': {
+            'g_major': ['G4', 'B4', 'D5'],
+            'a_minor': ['A4', 'C5', 'E5'],
+            'e_minor': ['E4', 'G4', 'B4'],
+            'c_major': ['C4', 'E4', 'G4']
+        }
+    };
+    
+    // Taylor Swift lesson functionality (lesson 6)
+    const taylorVideo = document.getElementById('taylor-swift-video');
+    if (taylorVideo) {
+        // Set the start time to 11:56 (716 seconds)
+        taylorVideo.addEventListener('loadedmetadata', function() {
+            taylorVideo.currentTime = 716;
+        });
+        
+        // Add event listener to reset video to start time when it reaches end time
+        taylorVideo.addEventListener('timeupdate', function() {
+            // If video reaches 13:56 (836 seconds), reset to start time
+            if (taylorVideo.currentTime >= 836) {
+                taylorVideo.currentTime = 716;
+            }
+        });
+    }
+    
+    // Chord button functionality for Taylor Swift lesson - optimized for minimal delay
+    $('.play-taylor-chord').on('click', function() {
+        const chordType = $(this).data('chord');
+        const notes = chordNotes.taylor[chordType];
+        
+        // Clear previous highlights and highlight new keys in one operation
+        const pianoKeys = $('#taylor-piano .white-key, #taylor-piano .black-key');
+        pianoKeys.removeClass('highlight');
+        
+        // Highlight the keys in the chord
+        notes.forEach(note => {
+            $(`#taylor-piano [data-note="${note}"]`).addClass('highlight');
+        });
+        
+        // Play the chord immediately
+        synth.triggerAttackRelease(notes, "2n");
+    });
+    
+    // Beyoncé Halo lesson functionality (lesson 7)
+    const beyonceVideo = document.getElementById('beyonce-video');
+    if (beyonceVideo) {
+        // Auto-play when ready
+        beyonceVideo.addEventListener('loadedmetadata', function() {
+            // Ready to play
+        });
+    }
+    
+    // Chord button functionality for Beyoncé lesson - optimized for minimal delay
+    $('.play-beyonce-chord').on('click', function() {
+        const chordType = $(this).data('chord');
+        const notes = chordNotes.beyonce[chordType];
+        
+        // Clear previous highlights and highlight new keys in one operation
+        const pianoKeys = $('#beyonce-piano .white-key, #beyonce-piano .black-key');
+        pianoKeys.removeClass('highlight');
+        
+        // Highlight the keys in the chord
+        notes.forEach(note => {
+            $(`#beyonce-piano [data-note="${note}"]`).addClass('highlight');
+        });
+        
+        // Play the chord immediately
+        synth.triggerAttackRelease(notes, "2n");
+    });
 });
 
 // Helper function to compare arrays
@@ -229,3 +312,7 @@ function setsEqual(a, b) {
     }
     return true;
 }
+
+// Taylor Swift lesson functionality (lesson 6)
+// Move this code inside the main document.ready function to access the synth variable
+

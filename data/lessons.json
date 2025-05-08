@@ -49,5 +49,55 @@
         "title": "G Minor Triad"
       }
     }
+  },
+  {
+    "lesson": 6,
+    "title": "Taylor Swift Chord Progressions",
+    "content": "Many popular Taylor Swift songs use the same few chord progressions. In this lesson, we'll learn how four simple chords - C major, G major, A minor, and F major - can be used to play numerous Taylor Swift songs. Try playing each chord and notice how they sound together. These chord progressions create the foundation for many of her hit songs!",
+    "video": "Taylor Swift.mp4",
+    "videoStart": 716,
+    "videoEnd": 836,
+    "chords": {
+      "c_major": {
+        "notes": ["C4", "E4", "G4"],
+        "title": "C Major"
+      },
+      "g_major": {
+        "notes": ["G4", "B4", "D5"],
+        "title": "G Major"
+      },
+      "a_minor": {
+        "notes": ["A4", "C5", "E5"],
+        "title": "A Minor"
+      },
+      "f_major": {
+        "notes": ["F4", "A4", "C5"],
+        "title": "F Major"
+      }
+    }
+  },
+  {
+    "lesson": 7,
+    "title": "Playing Along with Beyoncé's Halo",
+    "content": "Beyoncé's hit song 'Halo' uses a beautiful chord progression that creates its emotional atmosphere. In this lesson, we'll learn how to play the four main chords used in this song: G major, A minor, E minor, and C major. Practice playing along with the video and try to match the rhythm of the chord changes.",
+    "video": "Helo - Beyoncé - Chords.mp4",
+    "chords": {
+      "g_major": {
+        "notes": ["G4", "B4", "D5"],
+        "title": "G Major"
+      },
+      "a_minor": {
+        "notes": ["A4", "C5", "E5"],
+        "title": "A Minor"
+      },
+      "e_minor": {
+        "notes": ["E4", "G4", "B4"],
+        "title": "E Minor"
+      },
+      "c_major": {
+        "notes": ["C4", "E4", "G4"],
+        "title": "C Major"
+      }
+    }
   }
 ]

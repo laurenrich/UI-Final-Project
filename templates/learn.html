@@ -243,6 +243,146 @@
                     </div>
                     {% endif %}
 
+                    {% if lesson_data.lesson == 6 %}
+                    <!-- Taylor Swift Chord Progression Lesson -->
+                    <div class="row mb-4">
+                        <!-- Video Section -->
+                        <div class="col-12 mb-4">
+                            <div class="video-container text-center">
+                                <video id="taylor-swift-video" style="max-width: 50%; max-height: 300px;" controls>
+                                    <source src="{{ url_for('static', filename='videos/' + lesson_data.video) }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        
+                        <!-- Piano Section -->
+                        <div class="col-12">
+                            <div class="piano-container mb-4">
+                                <div id="taylor-piano" class="d-flex justify-content-center">
+                                    <!-- First Octave -->
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="C4">C</div>
+                                        <div class="black-key" data-note="C#4"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="D4">D</div>
+                                        <div class="black-key" data-note="D#4"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="E4">E</div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="F4">F</div>
+                                        <div class="black-key" data-note="F#4"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="G4">G</div>
+                                        <div class="black-key" data-note="G#4"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="A4">A</div>
+                                        <div class="black-key" data-note="A#4"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="B4">B</div>
+                                    </div>
+                                    <!-- Second Octave -->
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="C5">C</div>
+                                        <div class="black-key" data-note="C#5"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="D5">D</div>
+                                        <div class="black-key" data-note="D#5"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="E5">E</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Chord Buttons -->
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-primary play-taylor-chord me-2" data-chord="c_major">C Major</button>
+                                    <button class="btn btn-primary play-taylor-chord me-2" data-chord="g_major">G Major</button>
+                                    <button class="btn btn-primary play-taylor-chord me-2" data-chord="a_minor">A Minor</button>
+                                    <button class="btn btn-primary play-taylor-chord" data-chord="f_major">F Major</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if lesson_data.lesson == 7 %}
+                    <!-- Beyoncé Halo Chord Progression Lesson -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <!-- Video Section (Left Side) -->
+                            <div class="video-container h-100 d-flex align-items-center justify-content-center">
+                                <video id="beyonce-video" style="width: 100%; max-height: 400px;" controls>
+                                    <source src="{{ url_for('static', filename='videos/' + lesson_data.video) }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <!-- Piano Section (Right Side) -->
+                            <div class="piano-container mb-4">
+                                <div id="beyonce-piano" class="d-flex justify-content-center">
+                                    <!-- First Octave -->
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="C4">C</div>
+                                        <div class="black-key" data-note="C#4"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="D4">D</div>
+                                        <div class="black-key" data-note="D#4"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="E4">E</div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="F4">F</div>
+                                        <div class="black-key" data-note="F#4"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="G4">G</div>
+                                        <div class="black-key" data-note="G#4"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="A4">A</div>
+                                        <div class="black-key" data-note="A#4"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="B4">B</div>
+                                    </div>
+                                    <!-- Second Octave -->
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="C5">C</div>
+                                        <div class="black-key" data-note="C#5"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="D5">D</div>
+                                        <div class="black-key" data-note="D#5"></div>
+                                    </div>
+                                    <div class="key-container">
+                                        <div class="white-key" data-note="E5">E</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Chord Buttons -->
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="g_major">G Major</button>
+                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="a_minor">A Minor</button>
+                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="e_minor">E Minor</button>
+                                    <button class="btn btn-primary play-beyonce-chord" data-chord="c_major">C Major</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
                     <div class="d-flex justify-content-between mt-4">
                         {% if lesson_data.lesson > 1 %}
                             <a class="btn btn-outline-secondary" href="/learn/{{ lesson_data.lesson - 1 }}">Previous</a>
@@ -251,7 +391,7 @@
                         {% endif %}
 
                         {% set next_lesson = lesson_data.lesson + 1 %}
-                        {% if next_lesson > 5 %}
+                        {% if next_lesson > 7 %}
                             <a class="btn btn-success" href="/quiz/1">Go to Quiz</a>
                         {% else %}
                             <a class="btn btn-primary" href="/learn/{{ next_lesson }}">Next</a>
