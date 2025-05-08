@@ -287,6 +287,12 @@
   background: #ffd700;
 }
 
+.needs-attention {
+    outline: 3px solid #ffc107 !important; /* Bootstrap warning yellow */
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.7) !important;
+    transition: outline 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+
 .piano-container {
     position: relative;
     padding: 20px;

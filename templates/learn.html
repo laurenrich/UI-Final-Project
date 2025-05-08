@@ -116,38 +116,37 @@
                     {% endif %}
 
                     {% if lesson_data.lesson == 3 %}
-                    <!-- Aladdin Video Section -->
+                    <!-- Aladdin Video and Audio Section -->
                     <div class="row mt-4 mb-4">
-                        <div class="col-12 text-center">
-                            <video id="aladdin-video" style="max-width: 60%; max-height: 300px;" muted>
-                                <source src="{{ url_for('static', filename='videos/Aladdin.mp4') }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-                    </div>
-                    
-                    <!-- Major vs Minor Audio Examples -->
-                    <div class="row mt-4">
-                        <div class="col-md-6">
-                            <div class="card">
+                        <!-- Left Column for Audio Players -->
+                        <div class="col-md-4">
+                            <div class="card mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title">Major Key Version</h5>
-                                    <audio id="major-audio" controls>
+                                    <audio id="major-audio" controls class="w-100">
                                         <source src="{{ url_for('static', filename='audio/whole_new_world_major.mp3') }}" type="audio/mpeg">
                                         Your browser does not support the audio element.
                                     </audio>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Minor Key Version</h5>
-                                    <audio id="minor-audio" controls>
+                                    <audio id="minor-audio" controls class="w-100">
                                         <source src="{{ url_for('static', filename='audio/whole_new_world_minor.mp3') }}" type="audio/mpeg">
                                         Your browser does not support the audio element.
                                     </audio>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column for Video -->
+                        <div class="col-md-8">
+                            <div class="video-container text-center mt-3">
+                                <video id="aladdin-video" style="max-width: 60%; height: auto;" muted>
+                                    <source src="{{ url_for('static', filename='videos/Aladdin.mp4') }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
                             </div>
                         </div>
                     </div>
@@ -158,47 +157,72 @@
                             const aladdinVideo = document.getElementById('aladdin-video');
                             const majorAudio = document.getElementById('major-audio');
                             const minorAudio = document.getElementById('minor-audio');
-                            
-                            // Set the major audio to start at 7 seconds
-                            majorAudio.addEventListener('loadedmetadata', function() {
-                                this.currentTime = 7;
-                            });
-                            
-                            // Set the minor audio to start at 2 seconds
-                            minorAudio.addEventListener('loadedmetadata', function() {
-                                this.currentTime = 2;
-                            });
-                            
-                            // Set video to start at 7 seconds when loaded
-                            aladdinVideo.addEventListener('loadedmetadata', function() {
-                                this.currentTime = 7;
-                            });
-                            
-                            // Track which audio is currently playing
-                            let lastPlayedAudio = null;
-                            
-                            // Major audio play handler
+                            let lastPlayedAudio = null; // Can be 'major', 'minor', or null
+
+                            function highlightElement(element) {
+                                const card = element.closest('.card');
+                                if (card) {
+                                    card.classList.add('needs-attention');
+                                    setTimeout(() => {
+                                        card.classList.remove('needs-attention');
+                                    }, 1500);
+                                }
+                            }
+
+                            majorAudio.addEventListener('loadedmetadata', function() { this.currentTime = 7; });
+                            minorAudio.addEventListener('loadedmetadata', function() { this.currentTime = 2; }); // Note: audio start times differ
+                            aladdinVideo.addEventListener('loadedmetadata', function() { this.currentTime = 7; });
+
                             majorAudio.addEventListener('play', function() {
-                                // Only restart video if switching from minor to major
-                                if (lastPlayedAudio !== 'major') {
-                                    aladdinVideo.currentTime = 7;
-                                    lastPlayedAudio = 'major';
+                                if (!minorAudio.paused) { // If minor is currently playing
+                                    this.pause(); // Stop major from starting
+                                    highlightElement(minorAudio); // Highlight minor as it's the one playing
+                                    // DO NOT affect aladdinVideo here
+                                    return;
                                 }
+                                // Major is allowed to play
+                                if (lastPlayedAudio !== 'major' || aladdinVideo.paused) {
+                                    aladdinVideo.currentTime = 7; // Sync video
+                                }
+                                minorAudio.pause(); // Ensure minor is paused
                                 aladdinVideo.play();
-                                // Pause minor audio if it's playing
-                                if (!minorAudio.paused) minorAudio.pause();
+                                lastPlayedAudio = 'major';
+                                const majorCard = this.closest('.card');
+                                if (majorCard) majorCard.classList.remove('needs-attention');
                             });
-                            
-                            // Minor audio play handler
+
                             minorAudio.addEventListener('play', function() {
-                                // Only restart video if switching from major to minor
-                                if (lastPlayedAudio !== 'minor') {
-                                    aladdinVideo.currentTime = 7;
-                                    lastPlayedAudio = 'minor';
+                                if (!majorAudio.paused) { // If major is currently playing
+                                    this.pause(); // Stop minor from starting
+                                    highlightElement(majorAudio); // Highlight major as it's the one playing
+                                    // DO NOT affect aladdinVideo here
+                                    return;
                                 }
+                                // Minor is allowed to play
+                                if (lastPlayedAudio !== 'minor' || aladdinVideo.paused) {
+                                    aladdinVideo.currentTime = 7; // Sync video (using Aladdin's start point of 7s for both for now)
+                                }
+                                majorAudio.pause(); // Ensure major is paused
                                 aladdinVideo.play();
-                                // Pause major audio if it's playing
-                                if (!majorAudio.paused) majorAudio.pause();
+                                lastPlayedAudio = 'minor';
+                                const minorCard = this.closest('.card');
+                                if (minorCard) minorCard.classList.remove('needs-attention');
+                            });
+
+                            majorAudio.addEventListener('pause', function() {
+                                if (lastPlayedAudio === 'major') {
+                                    if (minorAudio.paused) {
+                                       aladdinVideo.pause();
+                                    }
+                                }
+                            });
+
+                            minorAudio.addEventListener('pause', function() {
+                                if (lastPlayedAudio === 'minor') {
+                                    if (majorAudio.paused) {
+                                        aladdinVideo.pause();
+                                    }
+                                }
                             });
                             
                             // Pause video when either audio pauses
