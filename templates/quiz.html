@@ -6,7 +6,14 @@
     </div>
 </div>
 
-<h2>{{ question_data.prompt }}</h2>
+<h2 class="d-flex align-items-center">
+    <span class="me-1">{{ question_data.prompt }}</span>
+    {% if question_data.type == 'multiple_choice' %}
+    <button id="play-btn" class="btn btn-link text-success p-0 ms-1 align-baseline" title="Play Answer Sound" aria-label="Play Answer Sound" style="text-decoration: none;">
+        <i class="bi bi-volume-up-fill fs-3"></i>
+    </button>
+    {% endif %}
+</h2>
 
 {% if question_data.type == 'piano' or question_data.highlight_notes %}
 <div class="piano-container mb-4">
@@ -52,7 +59,6 @@
 {% endif %}
 
 <div class="controls text-center mb-4">
-    <button id="play-btn" class="btn btn-success me-2">Play Sound</button>
     {% if question_data.type == 'piano' %}
     <button id="submit-btn" class="btn btn-primary">Submit Answer</button>
     {% endif %}
