@@ -627,17 +627,11 @@ $(document).ready(function () {
     document.querySelectorAll('.check-beyonce-chord').forEach(button => {
         button.addEventListener('click', function() {
             const chordType = this.dataset.chord;
-            let pianoId;
+            let pianoId = 'beyonce-' + chordType.split('_')[0] + '-piano'; // e.g., 'beyonce-a-piano' for a_major
             
-            // Determine which piano to use based on chord type
-            if (chordType === 'a_major') {
-                pianoId = 'beyonce-a-piano';
-            } else if (chordType === 'b_minor') {
-                pianoId = 'beyonce-b-piano';
-            } else if (chordType === 'f_sharp_minor') {
+            // Special case for f_sharp_minor
+            if (chordType === 'f_sharp_minor') {
                 pianoId = 'beyonce-f-piano';
-            } else if (chordType === 'd_major') {
-                pianoId = 'beyonce-d-piano';
             }
             
             const piano = document.getElementById(pianoId);
@@ -655,35 +649,45 @@ $(document).ready(function () {
             const feedback = piano.closest('.chord-practice')
                 .querySelector('.chord-feedback');
             
-            // Check each selected note
-            selectedNotes.forEach(note => {
-                const key = piano.querySelector(`[data-note="${note}"]`);
-                if (correctNotes.includes(note)) {
-                    key.classList.add('correct');
-                } else {
-                    key.classList.add('incorrect');
-                }
-            });
-            
-            // Highlight missing notes
-            correctNotes.forEach(note => {
-                if (!selectedNotes.includes(note)) {
+            try {
+                // Check each selected note
+                selectedNotes.forEach(note => {
                     const key = piano.querySelector(`[data-note="${note}"]`);
-                    key.classList.add('correct');
+                    if (key) {
+                        if (correctNotes.includes(note)) {
+                            key.classList.add('correct');
+                        } else {
+                            key.classList.add('incorrect');
+                        }
+                    }
+                });
+                
+                // Highlight missing notes
+                correctNotes.forEach(note => {
+                    if (!selectedNotes.includes(note)) {
+                        const key = piano.querySelector(`[data-note="${note}"]`);
+                        if (key) {
+                            key.classList.add('correct');
+                        }
+                    }
+                });
+                
+                // Only play the selected notes
+                if (selectedNotes.length > 0) {
+                    synth.triggerAttackRelease(selectedNotes, "2n");
                 }
-            });
-            
-            // Only play the selected notes
-            if (selectedNotes.length > 0) {
-                synth.triggerAttackRelease(selectedNotes, "2n");
-            }
-            
-            // Show feedback
-            if (arraysEqual(selectedNotes.sort(), correctNotes.sort())) {
-                feedback.textContent = 'Perfect! That\'s the correct chord!';
-                feedback.style.color = 'green';
-            } else {
-                feedback.textContent = 'Not quite. The green keys show what you need. You can keep trying - just click keys to select or unselect them.';
+                
+                // Show feedback
+                if (arraysEqual(selectedNotes.sort(), correctNotes.sort())) {
+                    feedback.textContent = 'Perfect! That\'s the correct chord!';
+                    feedback.style.color = 'green';
+                } else {
+                    feedback.textContent = 'Not quite. The green keys show what you need. You can keep trying - just click keys to select or unselect them.';
+                    feedback.style.color = 'red';
+                }
+            } catch (error) {
+                console.error("Error checking Beyoncé chord:", error);
+                feedback.textContent = 'An error occurred. Please try again.';
                 feedback.style.color = 'red';
             }
         });
