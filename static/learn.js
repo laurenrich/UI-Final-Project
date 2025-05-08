@@ -69,14 +69,34 @@ $(document).ready(function () {
         playScaleBtn.addEventListener('click', playScale);
     }
 
-    // Event listeners for interval demo
+    // Event listeners for interval demo 1 (C to C# and C to D)
     const playHalfStepBtn = document.getElementById('play-half-step');
     const playWholeStepBtn = document.getElementById('play-whole-step');
     if (playHalfStepBtn) {
-        playHalfStepBtn.addEventListener('click', () => playInterval(['C4', 'C#4']));
+        playHalfStepBtn.addEventListener('click', () => playInterval(['C4', 'C#4'], 'interval-piano'));
     }
     if (playWholeStepBtn) {
-        playWholeStepBtn.addEventListener('click', () => playInterval(['C4', 'D4']));
+        playWholeStepBtn.addEventListener('click', () => playInterval(['C4', 'D4'], 'interval-piano'));
+    }
+    
+    // Event listeners for interval demo 2 (E to F and E to F#)
+    const playHalfStepBtn2 = document.getElementById('play-half-step-2');
+    const playWholeStepBtn2 = document.getElementById('play-whole-step-2');
+    if (playHalfStepBtn2) {
+        playHalfStepBtn2.addEventListener('click', () => playInterval(['E4', 'F4'], 'interval-piano-2'));
+    }
+    if (playWholeStepBtn2) {
+        playWholeStepBtn2.addEventListener('click', () => playInterval(['E4', 'F#4'], 'interval-piano-2'));
+    }
+    
+    // Event listeners for interval demo 3 (F# to G and F# to G#)
+    const playHalfStepBtn3 = document.getElementById('play-half-step-3');
+    const playWholeStepBtn3 = document.getElementById('play-whole-step-3');
+    if (playHalfStepBtn3) {
+        playHalfStepBtn3.addEventListener('click', () => playInterval(['F#4', 'G4'], 'interval-piano-3'));
+    }
+    if (playWholeStepBtn3) {
+        playWholeStepBtn3.addEventListener('click', () => playInterval(['F#4', 'G#4'], 'interval-piano-3'));
     }
 
     // Event listeners for chord checking
@@ -186,7 +206,7 @@ $(document).ready(function () {
     }
     
     // Optimized playInterval function
-    function playInterval(notes) {
+    function playInterval(notes, pianoId = 'interval-piano') {
         let time = Tone.now();
         const interval = 0.5;
         
@@ -197,15 +217,15 @@ $(document).ready(function () {
             // Schedule UI updates
             setTimeout(() => {
                 // Remove previous highlights
-                $('#interval-piano .white-key, #interval-piano .black-key').removeClass('highlight');
+                $(`#${pianoId} .white-key, #${pianoId} .black-key`).removeClass('highlight');
                 
                 // Add highlight to current note
-                $(`#interval-piano [data-note="${note}"]`).addClass('highlight');
+                $(`#${pianoId} [data-note="${note}"]`).addClass('highlight');
                 
                 // Remove highlight after a short delay
                 if (index === notes.length - 1) {
                     setTimeout(() => {
-                        $('#interval-piano .white-key, #interval-piano .black-key').removeClass('highlight');
+                        $(`#${pianoId} .white-key, #${pianoId} .black-key`).removeClass('highlight');
                     }, 500);
                 }
             }, index * interval * 1000);
@@ -256,20 +276,20 @@ $(document).ready(function () {
         });
     }
 
-    async function playInterval(notes) {
+    async function playInterval(notes, pianoId = 'interval-piano') {
         await Tone.start();
         // Clear previous highlights
-        document.querySelectorAll('#interval-piano .white-key, #interval-piano .black-key')
+        document.querySelectorAll(`#${pianoId} .white-key, #${pianoId} .black-key`)
             .forEach(key => key.classList.remove('highlight'));
 
         // Highlight and play first note
-        const firstKey = document.querySelector(`#interval-piano [data-note="${notes[0]}"]`);
+        const firstKey = document.querySelector(`#${pianoId} [data-note="${notes[0]}"]`);
         firstKey.classList.add('highlight');
         synth.triggerAttackRelease(notes[0], "4n");
 
         // After delay, highlight and play second note
         setTimeout(() => {
-            const secondKey = document.querySelector(`#interval-piano [data-note="${notes[1]}"]`);
+            const secondKey = document.querySelector(`#${pianoId} [data-note="${notes[1]}"]`);
             secondKey.classList.add('highlight');
             synth.triggerAttackRelease(notes[1], "4n");
 

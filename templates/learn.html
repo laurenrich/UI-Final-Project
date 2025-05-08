@@ -49,8 +49,9 @@
                     {% endif %}
 
                     {% if lesson_data.lesson == 2 %}
-                    <!-- Interval Demo -->
+                    <!-- First Interval Demo: C to C# (half step) and C to D (whole step) -->
                     <div class="piano-container mb-4">
+                        <h5>Example 1: C to C# (half step) and C to D (whole step)</h5>
                         <div id="interval-piano" class="d-flex justify-content-center">
                             <div class="key-container">
                                 <div class="white-key" data-note="C4">C</div>
@@ -67,6 +68,49 @@
                         <div class="controls text-center mt-4">
                             <button id="play-half-step" class="btn btn-primary me-2">Play Half Step (C to C♯)</button>
                             <button id="play-whole-step" class="btn btn-primary">Play Whole Step (C to D)</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Second Interval Demo: E to F (half step) and E to F# (whole step) -->
+                    <div class="piano-container mb-4">
+                        <h5>Example 2: E to F (half step between white keys) and E to F# (whole step)</h5>
+                        <div id="interval-piano-2" class="d-flex justify-content-center">
+                            <div class="key-container">
+                                <div class="white-key" data-note="E4">E</div>
+                            </div>
+                            <div class="key-container">
+                                <div class="white-key" data-note="F4">F</div>
+                                <div class="black-key" data-note="F#4"></div>
+                            </div>
+                            <div class="key-container">
+                                <div class="white-key" data-note="G4">G</div>
+                            </div>
+                        </div>
+                        <div class="controls text-center mt-4">
+                            <button id="play-half-step-2" class="btn btn-primary me-2">Play Half Step (E to F)</button>
+                            <button id="play-whole-step-2" class="btn btn-primary">Play Whole Step (E to F#)</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Third Interval Demo: F# to G (half step) and F# to G# (whole step) -->
+                    <div class="piano-container mb-4">
+                        <h5>Example 3: F# to G (half step from black to white key) and F# to G# (whole step between black keys)</h5>
+                        <div id="interval-piano-3" class="d-flex justify-content-center">
+                            <div class="key-container">
+                                <div class="white-key" data-note="F4">F</div>
+                                <div class="black-key" data-note="F#4">F#</div>
+                            </div>
+                            <div class="key-container">
+                                <div class="white-key" data-note="G4">G</div>
+                                <div class="black-key" data-note="G#4">G#</div>
+                            </div>
+                            <div class="key-container">
+                                <div class="white-key" data-note="A4">A</div>
+                            </div>
+                        </div>
+                        <div class="controls text-center mt-4">
+                            <button id="play-half-step-3" class="btn btn-primary me-2">Play Half Step (F# to G)</button>
+                            <button id="play-whole-step-3" class="btn btn-primary">Play Whole Step (F# to G#)</button>
                         </div>
                     </div>
                     {% endif %}
@@ -120,33 +164,59 @@
                                 this.currentTime = 7;
                             });
                             
+                            // Set the minor audio to start at 2 seconds
+                            minorAudio.addEventListener('loadedmetadata', function() {
+                                this.currentTime = 2;
+                            });
+                            
                             // Set video to start at 7 seconds when loaded
                             aladdinVideo.addEventListener('loadedmetadata', function() {
                                 this.currentTime = 7;
                             });
                             
-                            // Play video when major audio plays
+                            // Track which audio is currently playing
+                            let lastPlayedAudio = null;
+                            
+                            // Major audio play handler
                             majorAudio.addEventListener('play', function() {
-                                aladdinVideo.currentTime = 7; // Always start at 7 second mark
+                                // Only restart video if switching from minor to major
+                                if (lastPlayedAudio !== 'major') {
+                                    aladdinVideo.currentTime = 7;
+                                    lastPlayedAudio = 'major';
+                                }
                                 aladdinVideo.play();
-                                minorAudio.pause(); // Pause the other audio if playing
+                                // Pause minor audio if it's playing
+                                if (!minorAudio.paused) minorAudio.pause();
                             });
                             
-                            // Pause video when major audio pauses
+                            // Minor audio play handler
+                            minorAudio.addEventListener('play', function() {
+                                // Only restart video if switching from major to minor
+                                if (lastPlayedAudio !== 'minor') {
+                                    aladdinVideo.currentTime = 7;
+                                    lastPlayedAudio = 'minor';
+                                }
+                                aladdinVideo.play();
+                                // Pause major audio if it's playing
+                                if (!majorAudio.paused) majorAudio.pause();
+                            });
+                            
+                            // Pause video when either audio pauses
                             majorAudio.addEventListener('pause', function() {
                                 aladdinVideo.pause();
                             });
                             
-                            // Play video when minor audio plays
-                            minorAudio.addEventListener('play', function() {
-                                aladdinVideo.currentTime = 7; // Always start at 7 second mark
-                                aladdinVideo.play();
-                                majorAudio.pause(); // Pause the other audio if playing
-                            });
-                            
-                            // Pause video when minor audio pauses
                             minorAudio.addEventListener('pause', function() {
                                 aladdinVideo.pause();
+                            });
+                            
+                            // Disable seeking events from affecting video position
+                            majorAudio.addEventListener('seeking', function(e) {
+                                // Do nothing - let the video continue playing as is
+                            });
+                            
+                            minorAudio.addEventListener('seeking', function(e) {
+                                // Do nothing - let the video continue playing as is
                             });
                         });
                     </script>
