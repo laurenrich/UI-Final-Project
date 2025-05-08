@@ -244,7 +244,163 @@
                     {% endif %}
 
                     {% if lesson_data.lesson == 6 %}
-                    <!-- Taylor Swift Chord Progression Lesson -->
+                    <!-- Build Taylor Swift's Chord Progression Lesson -->
+                    <div class="row mb-4">
+                        <div class="col-12 mb-4">
+                            <p class="lead">Build each chord by clicking the correct keys on the piano. Then check your work with the "Check Chord" button.</p>
+                        </div>
+                        
+                        <!-- G Major Piano -->
+                        <div class="col-md-6 mb-4">
+                            <div class="chord-practice text-center p-3 border rounded">
+                                <h4>Build G Major Chord</h4>
+                                <div class="piano-container">
+                                    <div id="taylor-g-piano" class="d-flex justify-content-center">
+                                        <!-- Simplified Keyboard -->
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="G4">G</div>
+                                            <div class="black-key" data-note="G#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="A4">A</div>
+                                            <div class="black-key" data-note="A#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="B4">B</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="C5">C</div>
+                                            <div class="black-key" data-note="C#5"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="D5">D</div>
+                                            <div class="black-key" data-note="D#5"></div>
+                                        </div>
+                                    </div>
+                                    <div class="chord-feedback-container">
+                                        <p class="chord-feedback mt-2"></p>
+                                    </div>
+                                </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-success check-taylor-chord" data-chord="g_major">Check G Major Chord</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- D Major Piano -->
+                        <div class="col-md-6 mb-4">
+                            <div class="chord-practice text-center p-3 border rounded">
+                                <h4>Build D Major Chord</h4>
+                                <div class="piano-container">
+                                    <div id="taylor-d-piano" class="d-flex justify-content-center">
+                                        <!-- Simplified Keyboard -->
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="D4">D</div>
+                                            <div class="black-key" data-note="D#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="E4">E</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="F4">F</div>
+                                            <div class="black-key" data-note="F#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="G4">G</div>
+                                            <div class="black-key" data-note="G#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="A4">A</div>
+                                            <div class="black-key" data-note="A#4"></div>
+                                        </div>
+                                    </div>
+                                    <div class="chord-feedback-container">
+                                        <p class="chord-feedback mt-2"></p>
+                                    </div>
+                                </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-success check-taylor-chord" data-chord="d_major">Check D Major Chord</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- A Minor Piano -->
+                        <div class="col-md-6 mb-4">
+                            <div class="chord-practice text-center p-3 border rounded">
+                                <h4>Build A Minor Chord</h4>
+                                <div class="piano-container">
+                                    <div id="taylor-a-piano" class="d-flex justify-content-center">
+                                        <!-- Simplified Keyboard -->
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="A3">A</div>
+                                            <div class="black-key" data-note="A#3"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="B3">B</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="C4">C</div>
+                                            <div class="black-key" data-note="C#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="D4">D</div>
+                                            <div class="black-key" data-note="D#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="E4">E</div>
+                                        </div>
+                                    </div>
+                                    <div class="chord-feedback-container">
+                                        <p class="chord-feedback mt-2"></p>
+                                    </div>
+                                </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-success check-taylor-chord" data-chord="a_minor">Check A Minor Chord</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- C Major Piano -->
+                        <div class="col-md-6 mb-4">
+                            <div class="chord-practice text-center p-3 border rounded">
+                                <h4>Build C Major Chord</h4>
+                                <div class="piano-container">
+                                    <div id="taylor-c-piano" class="d-flex justify-content-center">
+                                        <!-- Simplified Keyboard -->
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="C4">C</div>
+                                            <div class="black-key" data-note="C#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="D4">D</div>
+                                            <div class="black-key" data-note="D#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="E4">E</div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="F4">F</div>
+                                            <div class="black-key" data-note="F#4"></div>
+                                        </div>
+                                        <div class="key-container">
+                                            <div class="white-key" data-note="G4">G</div>
+                                            <div class="black-key" data-note="G#4"></div>
+                                        </div>
+                                    </div>
+                                    <div class="chord-feedback-container">
+                                        <p class="chord-feedback mt-2"></p>
+                                    </div>
+                                </div>
+                                <div class="controls text-center mt-4">
+                                    <button class="btn btn-success check-taylor-chord" data-chord="c_major">Check C Major Chord</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if lesson_data.lesson == 7 %}
+                    <!-- Taylor Swift Chord Progression in Action Lesson -->
                     <div class="row mb-4">
                         <!-- Video Section -->
                         <div class="col-12 mb-4">
@@ -321,7 +477,7 @@
                     </div>
                     {% endif %}
 
-                    {% if lesson_data.lesson == 7 %}
+                    {% if lesson_data.lesson == 8 %}
                     <!-- Beyoncé Halo Chord Progression Lesson -->
                     <div class="row mb-4">
                         <div class="col-md-6">
@@ -399,7 +555,7 @@
                         {% endif %}
 
                         {% set next_lesson = lesson_data.lesson + 1 %}
-                        {% if next_lesson > 7 %}
+                        {% if next_lesson > 8 %}
                             <a class="btn btn-success" href="/quiz/1">Go to Quiz</a>
                         {% else %}
                             <a class="btn btn-primary" href="/learn/{{ next_lesson }}">Next</a>

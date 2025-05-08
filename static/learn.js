@@ -232,20 +232,80 @@ $(document).ready(function () {
         }
     };
     
-    // Taylor Swift lesson functionality (lesson 6)
+    // Taylor Swift chord building lesson functionality (lesson 6)
+    // Add click event listeners to piano keys for the Taylor Swift chord building lesson
+    document.querySelectorAll('#taylor-g-piano .white-key, #taylor-g-piano .black-key, #taylor-d-piano .white-key, #taylor-d-piano .black-key, #taylor-a-piano .white-key, #taylor-a-piano .black-key, #taylor-c-piano .white-key, #taylor-c-piano .black-key').forEach(key => {
+        key.addEventListener('click', function() {
+            const note = this.dataset.note;
+            synth.triggerAttackRelease(note, "8n");
+            
+            // Track clicked keys for chord building
+            this.classList.toggle('selected');
+            // Remove incorrect/correct highlights when a new selection is made
+            this.classList.remove('incorrect', 'correct');
+        });
+    });
+    
+    // Event listeners for checking Taylor Swift chords
+    document.querySelectorAll('.check-taylor-chord').forEach(button => {
+        button.addEventListener('click', function() {
+            const chordType = this.dataset.chord;
+            const pianoId = 'taylor-' + chordType.split('_')[0] + '-piano'; // e.g., 'taylor-g-piano' for g_major
+            const piano = document.getElementById(pianoId);
+            
+            // Clear previous highlights
+            piano.querySelectorAll('.white-key, .black-key').forEach(key => {
+                key.classList.remove('correct', 'incorrect');
+            });
+            
+            const selectedNotes = Array.from(piano.querySelectorAll('.selected'))
+                .map(key => key.dataset.note);
+            
+            const correctNotes = chordNotes.taylor[chordType];
+            
+            const feedback = piano.closest('.chord-practice')
+                .querySelector('.chord-feedback');
+            
+            // Check each selected note
+            selectedNotes.forEach(note => {
+                const key = piano.querySelector(`[data-note="${note}"]`);
+                if (correctNotes.includes(note)) {
+                    key.classList.add('correct');
+                } else {
+                    key.classList.add('incorrect');
+                }
+            });
+            
+            // Highlight missing notes
+            correctNotes.forEach(note => {
+                if (!selectedNotes.includes(note)) {
+                    const key = piano.querySelector(`[data-note="${note}"]`);
+                    key.classList.add('correct');
+                }
+            });
+            
+            // Only play the selected notes
+            if (selectedNotes.length > 0) {
+                synth.triggerAttackRelease(selectedNotes, "2n");
+            }
+            
+            // Show feedback
+            if (arraysEqual(selectedNotes.sort(), correctNotes.sort())) {
+                feedback.textContent = 'Perfect! That\'s the correct chord!';
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = 'Not quite. The green keys show what you need. You can keep trying - just click keys to select or unselect them.';
+                feedback.style.color = 'red';
+            }
+        });
+    });
+    
+    // Taylor Swift video lesson functionality (lesson 7)
     const taylorVideo = document.getElementById('taylor-swift-video');
     if (taylorVideo) {
-        // Set the start time to 11:56 (716 seconds)
+        // Auto-play when ready
         taylorVideo.addEventListener('loadedmetadata', function() {
-            taylorVideo.currentTime = 716;
-        });
-        
-        // Add event listener to reset video to start time when it reaches end time
-        taylorVideo.addEventListener('timeupdate', function() {
-            // If video reaches 13:56 (836 seconds), reset to start time
-            if (taylorVideo.currentTime >= 836) {
-                taylorVideo.currentTime = 716;
-            }
+            // Ready to play
         });
     }
     
