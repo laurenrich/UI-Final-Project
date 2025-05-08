@@ -162,6 +162,161 @@ $(document).ready(function () {
             playChord(notes);
         });
     });
+    
+    // Event listeners for show intervals buttons
+    document.querySelectorAll('.show-intervals').forEach(button => {
+        button.addEventListener('click', function() {
+            const chordType = this.dataset.chordType;
+            demonstrateIntervals(chordType);
+        });
+    });
+    
+    // Function to demonstrate the half steps to the third note
+    function demonstrateIntervals(chordType) {
+        // Reset all highlights and counters
+        document.querySelectorAll('.white-key, .black-key').forEach(key => {
+            key.classList.remove('highlight', 'chord-blue', 'chord-third');
+            const counters = key.querySelectorAll('.step-counter');
+            counters.forEach(counter => counter.remove());
+        });
+        
+        // Define the piano container based on chord type using specific IDs
+        const pianoContainer = chordType === 'major' ? 
+            document.getElementById('major-chord-diagram') : 
+            document.getElementById('minor-chord-diagram');
+        
+        // Log for debugging
+        console.log('Chord type:', chordType);
+        console.log('Piano container found:', pianoContainer);
+        
+        // Define the notes and steps for each chord type
+        const chordNotes = chordType === 'major' ? 
+            ['C4', 'E4', 'G4'] : ['C4', 'Eb4', 'G4'];
+        
+        // Define the sequence of notes to the third (including half steps)
+        const halfStepSequence = chordType === 'major' ? 
+            ['C4', 'C#4', 'D4', 'D#4', 'E4'] : ['C4', 'C#4', 'D4', 'Eb4'];
+        
+        // Number of half steps to the third
+        const halfStepCount = chordType === 'major' ? 4 : 3;
+        
+        // First play the chord notes in sequence
+        playChordSequence(chordNotes, halfStepSequence, halfStepCount, pianoContainer, chordType);
+    }
+    
+    // Function to play the chord notes first, then demonstrate half steps
+    function playChordSequence(chordNotes, halfStepSequence, totalSteps, pianoContainer, chordType) {
+        let time = Tone.now();
+        const interval = 0.6; // Time between notes
+        
+        // First play the chord notes in sequence
+        chordNotes.forEach((note, index) => {
+            // Play the chord note
+            synth.triggerAttackRelease(note, "8n", time + index * interval);
+            
+            // Schedule UI updates for chord notes
+            setTimeout(() => {
+                // Clear previous highlights only in this piano container
+                pianoContainer.querySelectorAll('.white-key, .black-key').forEach(key => {
+                    key.classList.remove('highlight', 'chord-blue', 'chord-third');
+                });
+                
+                // Highlight all chord notes played so far
+                for (let i = 0; i <= index; i++) {
+                    const chordKey = pianoContainer.querySelector(`[data-note="${chordNotes[i]}"]`);
+                    if (chordKey) {
+                        if (i === 1) { // The third note
+                            chordKey.classList.add('chord-blue');
+                        } else {
+                            chordKey.classList.add('chord-blue');
+                        }
+                    }
+                }
+                
+                // After playing all chord notes, show the half steps
+                if (index === chordNotes.length - 1) {
+                    setTimeout(() => {
+                        showHalfSteps(halfStepSequence, totalSteps, chordNotes, pianoContainer, chordType);
+                    }, 1000);
+                }
+            }, index * interval * 1000);
+        });
+    }
+    
+    // Function to show half steps with counters
+    function showHalfSteps(notes, totalSteps, chordNotes, pianoContainer, chordType) {
+        let time = Tone.now();
+        const interval = 0.6; // Time between notes
+        
+        // We'll add step counters as we play each note
+        // First, make sure there are no counters left
+        pianoContainer.querySelectorAll('.step-counter').forEach(counter => {
+            counter.remove();
+        });
+        
+        // Highlight the chord notes in blue
+        chordNotes.forEach((note, index) => {
+            const key = pianoContainer.querySelector(`[data-note="${note}"]`);
+            if (key) {
+                if (index === 1) { // The third note
+                    key.classList.add('chord-third');
+                } else {
+                    key.classList.add('chord-blue');
+                }
+            }
+        });
+        
+        // Play the half step sequence
+        notes.forEach((note, index) => {
+            // Skip the root note as we already played it
+            if (index > 0) {
+                // Play the note after a delay
+                synth.triggerAttackRelease(note, "8n", time + (index - 1) * interval);
+                
+                // Schedule UI updates
+                setTimeout(() => {
+                    // Remove temporary highlights only in this piano container
+                    pianoContainer.querySelectorAll('.white-key, .black-key').forEach(key => {
+                        if (!key.classList.contains('chord-blue') && !key.classList.contains('chord-third')) {
+                            key.classList.remove('highlight');
+                        }
+                    });
+                    
+                    // Add highlight to current note if it's not already highlighted
+                    const key = pianoContainer.querySelector(`[data-note="${note}"]`);
+                    if (key && !key.classList.contains('chord-blue') && !key.classList.contains('chord-third')) {
+                        key.classList.add('highlight');
+                        
+                        // Add step counter for this note
+                        if (index <= totalSteps) {
+                            const counter = document.createElement('div');
+                            counter.className = 'step-counter';
+                            counter.textContent = index;
+                            key.appendChild(counter);
+                        }
+                    }
+                    
+                    // Special handling for the third note
+                    if (index === totalSteps) { // This is the third note
+                        const thirdKey = pianoContainer.querySelector(`[data-note="${note}"]`);
+                        if (thirdKey) {
+                            // Remove other classes and add chord-third
+                            thirdKey.classList.remove('chord-blue', 'highlight');
+                            thirdKey.classList.add('chord-third');
+                            
+                            // Make sure the counter is still visible
+                            if (!thirdKey.querySelector('.step-counter')) {
+                                const counter = document.createElement('div');
+                                counter.className = 'step-counter';
+                                counter.textContent = index;
+                                thirdKey.appendChild(counter);
+                            }
+                        }
+                    }
+                }, (index - 1) * interval * 1000);
+            }
+        });
+    }
 
     // Optimized playNote function with minimal delay
     function playNote(note) {

@@ -226,7 +226,7 @@
                     <!-- Chord Diagrams -->
                     <div class="row mb-4">
                         <div class="col-md-6">
-                            <div class="chord-diagram text-center p-3 border rounded">
+                            <div id="major-chord-diagram" class="chord-diagram text-center p-3 border rounded">
                                 <h4>{{ lesson_data.chords.major.title }}</h4>
                                 <div class="piano-container">
                                     <div class="d-flex justify-content-center">
@@ -253,11 +253,12 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-primary play-chord" data-piano="major">Play C Major Chord</button>
+                                    <button class="btn btn-info show-intervals" data-chord-type="major">Show Major Intervals</button>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="chord-diagram text-center p-3 border rounded">
+                            <div id="minor-chord-diagram" class="chord-diagram text-center p-3 border rounded">
                                 <h4>{{ lesson_data.chords.minor.title }}</h4>
                                 <div class="piano-container">
                                     <div class="d-flex justify-content-center">
@@ -284,6 +285,7 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-primary play-chord" data-piano="minor">Play C Minor Chord</button>
+                                    <button class="btn btn-info show-intervals" data-chord-type="minor">Show Minor Intervals</button>
                                 </div>
                             </div>
                         </div>
