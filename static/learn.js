@@ -1,11 +1,11 @@
 const sounds = {
-  "C": "https://piano-mp3.s3.us-west-1.amazonaws.com/C.mp3",
-  "D": "https://piano-mp3.s3.us-west-1.amazonaws.com/D.mp3",
-  "E": "https://piano-mp3.s3.us-west-1.amazonaws.com/E.mp3",
-  "F": "https://piano-mp3.s3.us-west-1.amazonaws.com/F.mp3",
-  "G": "https://piano-mp3.s3.us-west-1.amazonaws.com/G.mp3",
-  "A": "https://piano-mp3.s3.us-west-1.amazonaws.com/A.mp3",
-  "B": "https://piano-mp3.s3.us-west-1.amazonaws.com/B.mp3"
+  "C": "/static/audio/C.mp3",
+  "D": "/static/audio/D.mp3",
+  "E": "/static/audio/E.mp3",
+  "F": "/static/audio/F.mp3",
+  "G": "/static/audio/G.mp3",
+  "A": "/static/audio/A.mp3",
+  "B": "/static/audio/B.mp3"
 };
 
 $(document).ready(function () {
