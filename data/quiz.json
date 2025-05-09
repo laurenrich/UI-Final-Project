@@ -46,7 +46,15 @@
     "type": "multiple_choice",
     "options": ["Major", "Minor"],
     "answer": ["A4", "C#5", "E5"],
-    "correct_option": "Major"
+    "correct_option": "Major",
+    "piano_range": ["G4", "F5"]
+  },
+  {
+    "question": 8,
+    "prompt": "This piano shows an incorrect F Major chord. Fix it by selecting the correct notes.",
+    "type": "piano",
+    "answer": ["F4", "A4", "C5"],
+    "initial_selection": ["F4", "A4", "B4"],
+    "piano_range": ["E4", "D5"]
   }
 ]
-

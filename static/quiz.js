@@ -10,6 +10,14 @@ $(document).ready(function () {
             $(`.white-key[data-note="${note}"], .black-key[data-note="${note}"]`).addClass('highlight');
         });
     }
+    
+    // Pre-select initial notes if provided (for 'fix the chord' questions)
+    if (window.initialSelection && window.initialSelection.length > 0) {
+        window.initialSelection.forEach(note => {
+            $(`.white-key[data-note="${note}"], .black-key[data-note="${note}"]`).addClass('selected');
+            selectedNotes.add(note);
+        });
+    }
         
     // Handle piano key clicks for piano questions
     $('.white-key, .black-key').click(function() {

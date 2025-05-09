@@ -46,6 +46,34 @@
             <div class="white-key" data-note="A4">A</div>
             <div class="black-key" data-note="A#4"></div>
         </div>
+        {% elif question_data.question == 8 %}
+        {# Special layout for F Major chord (question 8) with F, A, and C keys accessible #}
+        <div class="key-container">
+            <div class="white-key" data-note="E4">E</div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="F4">F</div>
+            <div class="black-key" data-note="F#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="G4">G</div>
+            <div class="black-key" data-note="G#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="A4">A</div>
+            <div class="black-key" data-note="A#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="B4">B</div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="C5">C</div>
+            <div class="black-key" data-note="C#5"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="D5">D</div>
+            <div class="black-key" data-note="D#5"></div>
+        </div>
         {% elif question_data.question == 6 %}
         {# Special layout for G Major chord (question 6) with G, B, and D keys more accessible #}
         <div class="key-container">
@@ -133,6 +161,9 @@
     window.correctNotes = {{ question_data.answer|tojson|safe }};
     window.questionType = "{{ question_data.type }}";
     window.highlight_notes = {{ question_data.highlight_notes|default(false)|tojson|safe }};
+    {% if question_data.initial_selection is defined %}
+    window.initialSelection = {{ question_data.initial_selection|tojson|safe }};
+    {% endif %}
     {% if question_data.type == 'multiple_choice' %}
     window.correctOption = "{{ question_data.correct_option }}";
     {% endif %}
