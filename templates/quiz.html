@@ -18,6 +18,64 @@
 {% if question_data.type == 'piano' or question_data.highlight_notes %}
 <div class="piano-container mb-4">
     <div id="piano" class="d-flex justify-content-center">
+        {% if question_data.question == 2 %}
+        {# Special layout for B minor chord (question 2) with B key more accessible #}
+        <div class="key-container">
+            <div class="white-key" data-note="B3">B</div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="C4">C</div>
+            <div class="black-key" data-note="C#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="D4">D</div>
+            <div class="black-key" data-note="D#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="E4">E</div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="F4">F</div>
+            <div class="black-key" data-note="F#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="G4">G</div>
+            <div class="black-key" data-note="G#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="A4">A</div>
+            <div class="black-key" data-note="A#4"></div>
+        </div>
+        {% elif question_data.question == 6 %}
+        {# Special layout for G Major chord (question 6) with G, B, and D keys more accessible #}
+        <div class="key-container">
+            <div class="white-key" data-note="F4">F</div>
+            <div class="black-key" data-note="F#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="G4">G</div>
+            <div class="black-key" data-note="G#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="A4">A</div>
+            <div class="black-key" data-note="A#4"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="B4">B</div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="C5">C</div>
+            <div class="black-key" data-note="C#5"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="D5">D</div>
+            <div class="black-key" data-note="D#5"></div>
+        </div>
+        <div class="key-container">
+            <div class="white-key" data-note="E5">E</div>
+        </div>
+        {% else %}
+        {# Default piano layout for all other questions #}
         <div class="key-container">
             <div class="white-key" data-note="C4">C</div>
             <div class="black-key" data-note="C#4"></div>
@@ -44,6 +102,7 @@
         <div class="key-container">
             <div class="white-key" data-note="B4">B</div>
         </div>
+        {% endif %}
     </div>
 </div>
 {% endif %}
@@ -60,6 +119,7 @@
 
 <div class="controls text-center mb-4">
     {% if question_data.type == 'piano' %}
+    <button id="play-chord-btn" class="btn btn-success me-2"><i class="bi bi-volume-up-fill"></i> Play Chord</button>
     <button id="submit-btn" class="btn btn-primary">Submit Answer</button>
     {% endif %}
     <button id="next-question-btn" class="btn btn-info" style="display:none;">Next Question</button>

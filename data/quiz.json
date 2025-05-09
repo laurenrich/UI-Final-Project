@@ -9,9 +9,9 @@
   },
   {
     "question": 2,
-    "prompt": "Build a B Minor chord. Select the three notes that make up the chord (B, D, F#).",
+    "prompt": "Build a B Minor chord. Select the three notes that make up the chord.",
     "type": "piano",
-    "answer": ["B4", "D4", "F#4"]
+    "answer": ["B3", "D4", "F#4"]
   },
   {
     "question": 3,
@@ -37,7 +37,7 @@
     "type": "multiple_choice",
     "options": ["C Major", "G Major", "E Minor", "D Major"],
     "correct_option": "G Major",
-    "answer": ["G4", "B4", "D4"],
+    "answer": ["G4", "B4", "D5"],
     "highlight_notes": true
   },
   {

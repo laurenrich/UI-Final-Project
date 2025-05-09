@@ -52,6 +52,16 @@ $(document).ready(function () {
             synth.triggerAttackRelease(window.correctNotes, "1n");
         }
     });
+    
+    // Play Chord button - plays the user's selected notes
+    $('#play-chord-btn').click(async function() {
+        await Tone.start();
+        
+        // Play all selected notes simultaneously
+        if (selectedNotes.size > 0) {
+            synth.triggerAttackRelease(Array.from(selectedNotes), "1n");
+        }
+    });
 
     function submitMultipleChoiceAnswer() {
         const correct = selectedOption === window.correctOption;
