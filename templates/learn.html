@@ -6,7 +6,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h2>{{ lesson_data.title }}</h2>
-                    <p>{{ lesson_data.content }}</p>
+                    <div>{{ lesson_data.content|safe }}</div>
 
                     {% if lesson_data.lesson == 1 %}
                     <!-- C Major Scale Piano -->
@@ -138,6 +138,7 @@
                                     </audio>
                                 </div>
                             </div>
+                            <p style="font-style: italic; color: #666; font-size: 0.8em;">For best experience, please pause audio file before playing the next one</p>
                         </div>
 
                         <!-- Right Column for Video -->
@@ -181,8 +182,12 @@
                                     return;
                                 }
                                 // Major is allowed to play
-                                if (lastPlayedAudio !== 'major' || aladdinVideo.paused) {
+                                if (lastPlayedAudio !== 'major') {
+                                    // Only reset video position when switching from minor to major
                                     aladdinVideo.currentTime = 7; // Sync video
+                                } else if (aladdinVideo.paused) {
+                                    // If same audio but video is paused, just play the video without resetting position
+                                    // This allows skipping within the same audio file without video restart
                                 }
                                 minorAudio.pause(); // Ensure minor is paused
                                 aladdinVideo.play();
@@ -199,8 +204,12 @@
                                     return;
                                 }
                                 // Minor is allowed to play
-                                if (lastPlayedAudio !== 'minor' || aladdinVideo.paused) {
+                                if (lastPlayedAudio !== 'minor') {
+                                    // Only reset video position when switching from major to minor
                                     aladdinVideo.currentTime = 7; // Sync video (using Aladdin's start point of 7s for both for now)
+                                } else if (aladdinVideo.paused) {
+                                    // If same audio but video is paused, just play the video without resetting position
+                                    // This allows skipping within the same audio file without video restart
                                 }
                                 majorAudio.pause(); // Ensure major is paused
                                 aladdinVideo.play();
@@ -234,13 +243,13 @@
                                 aladdinVideo.pause();
                             });
                             
-                            // Disable seeking events from affecting video position
-                            majorAudio.addEventListener('seeking', function(e) {
-                                // Do nothing - let the video continue playing as is
+                            // Add seeking event listeners to prevent video restart when seeking within the same audio
+                            majorAudio.addEventListener('seeking', function() {
+                                // Do nothing, let the video continue playing at its current position
                             });
-                            
-                            minorAudio.addEventListener('seeking', function(e) {
-                                // Do nothing - let the video continue playing as is
+
+                            minorAudio.addEventListener('seeking', function() {
+                                // Do nothing, let the video continue playing at its current position
                             });
                         });
                     </script>
@@ -312,6 +321,11 @@
                                     <button class="btn btn-info show-intervals" data-chord-type="minor">Show Minor Intervals</button>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <p class="text-center">This pattern works for any root note. Once you understand how to count intervals, you can build major or minor chords anywhere on the keyboard.</p>
                         </div>
                     </div>
                     {% endif %}
@@ -394,11 +408,8 @@
 
                     {% if lesson_data.lesson == 6 %}
                     <!-- Build Taylor Swift's Chord Progression Lesson -->
+                    <!-- First Row: G Major and D Major -->
                     <div class="row mb-4">
-                        <div class="col-12 mb-4">
-                            <p class="lead">Build each chord by clicking the correct keys on the piano. Then check your work with the "Check Chord" button.</p>
-                        </div>
-                        
                         <!-- G Major Piano -->
                         <div class="col-md-6 mb-4">
                             <div class="chord-practice text-center p-3 border rounded">
@@ -432,6 +443,10 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-success check-taylor-chord" data-chord="g_major">Check G Major Chord</button>
+                                    <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('g-major-hint')">Show Hint</button>
+                                    <div id="g-major-hint" class="hint-content mt-2" style="display: none;">
+                                        <p class="text-info">G Major: G (root) + B (major third) + D (fifth)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -469,10 +484,17 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-success check-taylor-chord" data-chord="d_major">Check D Major Chord</button>
+                                    <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('d-major-hint')">Show Hint</button>
+                                    <div id="d-major-hint" class="hint-content mt-2" style="display: none;">
+                                        <p class="text-info">D Major: D (root) + F♯ (major third) + A (fifth)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
+                    </div>
+                    
+                    <!-- Second Row: A Minor and C Major -->
+                    <div class="row mb-4">
                         <!-- A Minor Piano -->
                         <div class="col-md-6 mb-4">
                             <div class="chord-practice text-center p-3 border rounded">
@@ -505,6 +527,10 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-success check-taylor-chord" data-chord="a_minor">Check A Minor Chord</button>
+                                    <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('a-minor-hint')">Show Hint</button>
+                                    <div id="a-minor-hint" class="hint-content mt-2" style="display: none;">
+                                        <p class="text-info">A Minor: A (root) + C (minor third) + E (fifth)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -542,6 +568,10 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-success check-taylor-chord" data-chord="c_major">Check C Major Chord</button>
+                                    <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('c-major-hint')">Show Hint</button>
+                                    <div id="c-major-hint" class="hint-content mt-2" style="display: none;">
+                                        <p class="text-info">C Major: C (root) + E (major third) + G (fifth)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -629,9 +659,6 @@
                     {% if lesson_data.lesson == 8 %}
                     <!-- Build Beyoncé's Halo Chord Progression Lesson -->
                     <div class="row mb-4">
-                        <div class="col-12 mb-4">
-                            <p class="lead">Build each chord by clicking the correct keys on the piano. Then check your work with the "Check Chord" button.</p>
-                        </div>
                         
                         <!-- A Major Piano -->
                         <div class="col-md-6 mb-4">
@@ -665,6 +692,10 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-success check-beyonce-chord" data-chord="a_major">Check A Major Chord</button>
+                                    <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('a-major-beyonce-hint')">Show Hint</button>
+                                    <div id="a-major-beyonce-hint" class="hint-content mt-2" style="display: none;">
+                                        <p class="text-info">A Major: A (root) + C♯ (major third) + E (fifth)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -701,6 +732,10 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-success check-beyonce-chord" data-chord="b_minor">Check B Minor Chord</button>
+                                    <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('b-minor-beyonce-hint')">Show Hint</button>
+                                    <div id="b-minor-beyonce-hint" class="hint-content mt-2" style="display: none;">
+                                        <p class="text-info">B Minor: B (root) + D (minor third) + F♯ (fifth)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -741,6 +776,10 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-success check-beyonce-chord" data-chord="f_sharp_minor">Check F# Minor Chord</button>
+                                    <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('f-sharp-minor-hint')">Show Hint</button>
+                                    <div id="f-sharp-minor-hint" class="hint-content mt-2" style="display: none;">
+                                        <p class="text-info">F# Minor: F# (root) + A (minor third) + C# (fifth)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -778,6 +817,10 @@
                                 </div>
                                 <div class="controls text-center mt-4">
                                     <button class="btn btn-success check-beyonce-chord" data-chord="d_major">Check D Major Chord</button>
+                                    <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('d-major-beyonce-hint')">Show Hint</button>
+                                    <div id="d-major-beyonce-hint" class="hint-content mt-2" style="display: none;">
+                                        <p class="text-info">D Major: D (root) + F♯ (major third) + A (fifth)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -874,5 +917,15 @@
     </div>
 </div>
 
+<script>
+    function toggleHint(hintId) {
+        const hintElement = document.getElementById(hintId);
+        if (hintElement.style.display === 'none') {
+            hintElement.style.display = 'block';
+        } else {
+            hintElement.style.display = 'none';
+        }
+    }
+</script>
 <script src="{{ url_for('static', filename='learn.js') }}"></script>
 {% endblock %}
