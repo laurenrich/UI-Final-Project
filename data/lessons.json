@@ -2,7 +2,7 @@
   {
     "lesson": 1,
     "title": "Understanding Piano Notes",
-    "content": "<div>Let's start by understanding the layout of a piano. The keyboard is made up of repeating patterns of <b>white</b> and <b>black keys</b>.<ul><li>The <b>white keys</b> are labeled <b>A through G</b>, and once you reach G, the pattern starts over at A.</li><li>The <b>black keys</b> sit in groups of twos and threes. They don't have their own unique letter names. Instead, each black key is named based on the white key it's next to:<ul><li>If you go <b>up</b> from a white key, the black key is called a <b>sharp</b> (♯)</li><li>If you go <b>down</b>, it's called a <b>flat</b> (♭)</li></ul></li><li>For example:<ul><li>The black key between C and D can be called <b>C♯</b> or <b>D♭</b></li><li>They're the same note, just named differently depending on the musical context</li></ul></li></ul>Before we can build chords, we need to start with a <b>scale</b>—a group of notes played in order, step by step. Think of it like a musical staircase.<p>The easiest place to begin is with the <b>C Major scale</b>, which uses only white keys:<br><b>C – D – E – F – G – A – B – C</b></p><p><b>Click on the button to see the C major scale!</b></p></div>",
+    "content": "<div>Let's start by understanding the layout of a piano. The keyboard is made up of repeating patterns of <b>white</b> and <b>black keys</b>.<ul><li>The <b>white keys</b> are labeled <b>A through G</b>, and once you reach G, the pattern starts over at A.</li><li>The <b>black keys</b> sit in groups of twos and threes and don't have unique letter names. Instead, each black key is named based on the white key it's next to:<ul><li>If you go <b>up</b> from a white key, the black key is called a <b>sharp</b> (♯)</li><li>If you go <b>down</b>, it's called a <b>flat</b> (♭)</li></ul></li><li>For example:<ul><li>The black key between C and D can be called <b>C♯</b> or <b>D♭</b></li><li>They're the same note, just named differently depending on the musical context</li></ul></li></ul>Before we can build chords, we need to start with a <b>scale</b>—a group of notes played in order, step by step. Think of it like a musical staircase.<p>The easiest place to begin is with the <b>C Major scale</b>, which uses only white keys:<br><b>C – D – E – F – G – A – B – C</b></p><p><b>Click on the button to see the C major scale!</b></p></div>",
     "type": "interactive",
     "scale": ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"]
   },
@@ -14,7 +14,7 @@
   {
     "lesson": 3,
     "title": "Major vs Minor: The Emotional Color of Music",
-    "content": "<div>One small change in a chord can make a big difference in how it feels.<br>In music, that change often comes down to whether a chord is <b>major</b> or <b>minor</b>.</div><br><ul><li><b>Major chords</b> typically sound <b>happy, bright, or resolved</b>.</li><li><b>Minor chords</b> tend to sound more <b>sad, introspective, or tense</b>.</li></ul><div>These emotional qualities shape the tone of a song. For example:</div><br><div style='display: flex; justify-content: space-between;'><div style='width: 48%;'><b>Songs in major keys</b>:<ul><li>'Dancing Queen' – The ABBA</li><li>'Don't Stop Believin'' – Journey</li></ul></div><div style='width: 48%;'><b>Songs in minor keys</b>:<ul><li>'Bad Romance'- Lady Gaga</li><li>'Fix You' - Coldplay</li></ul></div></div><br><div>To hear how this works in practice, let's listen to the same melody—'<i>A Whole New World</i>' from <b>Aladdin</b>—played in both a <b>major</b> and a <b>minor</b> key.</div><br>",
+    "content": "<div>One small change in a chord can make a big difference in how it feels and change a song's tone.<br>In music, that change often comes down to whether a chord is <b>major</b> or <b>minor</b>.</div><br><ul><li><b>Major chords </b>in songs like <i>'Dancing Queen'</i> and <i>'Don't Stop Believin'</i> typically sound <b>happy, bright, or resolved</b>.</li><li><b>Minor chords </b>in songs like <i>'Bad Romance'</i> and <i>'Fix You'</i> tend to sound more <b>sad, introspective, or tense</b>.</li></ul><div>To hear how this works in practice, let's listen to the same melody—'<i>A Whole New World</i>' from <b>Aladdin</b>—played in both a <b>major</b> and a <b>minor</b> key.</div><br>",
     "audio": {
       "major": "whole_new_world_major.mp3",
       "minor": "whole_new_world_minor.mp3"
@@ -23,7 +23,7 @@
   {
     "lesson": 4,
     "title": "Building Chords",
-    "content": "<div>A chord is created by playing multiple notes together. The most common type of chord is a triad, which is made up of three specific notes:</div><div style='padding-left: 20px;'><ol><li>The <b>root</b> – the starting note</li><li>The <b>third</b> – this defines whether the chord is major or minor</li><li>The <b>fifth</b> – adds stability and fullness</li></ol></div><div>The key difference between major and minor chords lies in the type of third used:</div><ul><li>A <b>major chord</b> has a major third, which is <b>4 half steps</b> above the root</li><li>A <b>minor chord</b> has a minor third, which is <b>3 half steps</b> above the root</li><li>The <b>fifth</b> is always <b>7 half steps</b> above the root in both major and minor chords</li></ul><div>Let's take a closer look using the C major and C minor chords:</div><div style='display: flex; justify-content: space-between;'><div style='width: 48%;'><p><b>C Major:</b><br>C (root) → E (major third, 4 half steps above C) → G (fifth, 7 half steps above C)</p></div><div style='width: 48%;'><p><b>C Minor:</b><br>C (root) → E♭ (minor third, 3 half steps above C) → G (fifth, 7 half steps above C)</p></div></div><div>The only difference is the middle note—E in C major becomes E♭ in C minor. But that small shift creates a completely different sound.</div><div>Click the buttons below to hear the difference for yourself:</div>",
+    "content": "<div>A chord is created by playing multiple notes together. The most common type of chord is a triad, made up of three notes:</div><div style='padding-left: 20px;'><ol><li>The <b>root</b> – the starting note</li><li>The <b>third</b> – this defines whether the chord is major or minor</li><li>The <b>fifth</b> – adds stability and fullness</li></ol></div><div>The key difference between major and minor chords lies in the type of third used:</div><ul><li>A <b>major chord</b> has a major third, which is <b>4 half steps</b> above the root</li><li>A <b>minor chord</b> has a minor third, which is <b>3 half steps</b> above the root</li><li>The <b>fifth</b> is always <b>7 half steps</b> above the root in both major and minor chords</li></ul><div>Let's take a closer look using the C major and C minor chords:</div><div style='display: flex; justify-content: space-between;'><div style='width: 48%;'><p><b>C Major:</b><br>C (root) → E (major third, 4 half steps above C) → G (fifth, 7 half steps above C)</p></div><div style='width: 48%;'><p><b>C Minor:</b><br>C (root) → E♭ (minor third, 3 half steps above C) → G (fifth, 7 half steps above C)</p></div></div><div>The only difference is the middle note—E in C major becomes E♭ in C minor. But that small shift creates a completely different sound.</div><br><div><b>Click the buttons below to hear the difference for yourself:</b></div>",
     "chords": {
       "major": {
         "notes": ["C4", "E4", "G4"],
@@ -38,7 +38,7 @@
   {
     "lesson": 5,
     "title": "Build Your Own Chords",
-    "content": "<div><b>Now it's your turn!</b> Let's practice building both major and minor chords using the same root note.</div><br><div>Try to build these two chords:</div><ul><li><b>G Major chord:</b><ul><li>G (root)</li><li>B (major third, 4 half steps from root)</li><li>D (fifth, 7 half steps from root)</li></ul></li><li><b>G Minor chord:</b><ul><li>G (root)</li><li>B♭ (minor third, 3 half steps from root)</li><li>D (fifth, 7 half steps from root)</li></ul></li></ul><div>Notice that the <b>only difference</b> is the third note: <b>B</b> for major versus <b>B♭</b> for minor. The fifth is always 7 half steps above the root in both major and minor chords.</div><br><div>Click the piano keys to select your notes, then press the <b>Check Chord</b> button to see if you've built it correctly!</div>",
+    "content": "<div><b>Now it's your turn!</b> Let's practice building both major and minor chords using the same root note.</div><br><div>Try to build these two chords:</div><ul><li><b>G Major chord:</b><ul><li>G (root)</li><li>B (major third, 4 half steps from root)</li><li>D (fifth, 7 half steps from root)</li></ul></li><li><b>G Minor chord:</b><ul><li>G (root)</li><li>B♭ (minor third, 3 half steps from root)</li><li>D (fifth, 7 half steps from root)</li></ul></li></ul><div>Notice that the <b>only difference</b> is the third note: <b>B</b> for major versus <b>B♭</b> for minor. The fifth is always <b>7 half steps</b> above the root in both major and minor chords.</div><br><div>Click the piano keys to select your notes, then press the <b>Check Chord</b> button to see if you've built it correctly!</div>",
     "chords": {
       "major": {
         "notes": ["G4", "B4", "D5"],
@@ -53,7 +53,7 @@
   {
     "lesson": 6,
     "title": "Build Taylor Swift's Chord Progression",
-    "content": "<div>One of the most popular chord progressions in Taylor Swift's music is:</div><div class='text-center'><b>G major → D major → A minor → C major</b></div><div>This sequence appears in several of her biggest hits, including 'Love Story,' 'You Belong With Me,' and 'Fearless.'</div><br><div>Before we see these chords in action, let's practice building each one. Use what you've learned about root, third, and fifth to construct the full triad.</div><br><div>Click the keys on the keyboard to select your notes. Once you've chosen all three, click 'Check' to see if you got it right!</div>",
+    "content": "<div>One of the most popular chord progressions in Taylor Swift's music is:</div><br><div class='text-center'><b>G major → D major → A minor → C major</b></div><br><div>This sequence appears in several of her biggest hits, including <i>'Love Story,'</i> <i>'You Belong With Me,'</i> and <i>'Fearless.'</i></div><br><div>Before we see these chords in action, let's practice building each one. Use what you've learned about root, third, and fifth to construct the full triad.</div><br><div>Click the keys on the keyboard to select your notes. Once you've chosen all three, click <b>'Check'</b> to see if you got it right!</div>",
     "chords": {
       "g_major": {
         "notes": ["G4", "B4", "D5"],
@@ -76,7 +76,7 @@
   {
     "lesson": 7,
     "title": "Taylor Swift Chord Progressions in Action",
-    "content": "Now that you've successfully built all the chords in one of Taylor Swift's go-to progressions—G major, D major, A minor, and C major—it's time to see them in action.\n\nAs the video plays, click the button for each chord when prompted to follow along.",
+    "content": "Now that you've successfully built all the chords in one of Taylor Swift's go-to progressions—<b>G major, D major, A minor, and C major</b>—it's time to see them in action.\n\nAs the video plays, click the button for each chord when prompted to follow along.",
     "video": "TSMusic.mp4",
     "chords": {
       "g_major": {
@@ -100,7 +100,7 @@
   {
     "lesson": 8,
     "title": "Build Beyoncé's Halo Chord Progression",
-    "content": "Beyoncé's hit song 'Halo' uses a beautiful chord progression that creates its emotional atmosphere. In this lesson, we'll practice building the four main chords used in this song: A major, B minor, F# minor, and D major. Click the keys to select them, then check if you've built each chord correctly.",
+    "content": "Beyoncé's hit song 'Halo' uses a beautiful chord progression that creates its emotional atmosphere. In this lesson, we'll practice building the four main chords used in this song: <b>A major, B minor, F# minor, and D major</b>. Click the keys to select them, then check if you've built each chord correctly.",
     "chords": {
       "a_major": {
         "notes": ["A3", "C#4", "E4"],
@@ -123,7 +123,7 @@
   {
     "lesson": 9,
     "title": "Playing Along with Beyoncé's Halo",
-    "content": "Now that you've learned the chords, let's play along with Beyoncé's 'Halo'. This song uses A major, B minor, F# minor, and D major chords to create its emotional atmosphere. Practice playing along with the video and try to match the rhythm of the chord changes.",
+    "content": "Now that you've learned the chords, let's play along with Beyoncé's 'Halo'. This song uses <b>A major, B minor, F# minor, and D major </b>chords to create its emotional atmosphere. Practice playing along with the video and try to match the rhythm of the chord changes.",
     "video": "Halo.mp4",
     "chords": {
       "a_major": {

@@ -61,6 +61,69 @@
     }
 }
 
+.check{
+    color: white;
+    background-color: #198754;
+    border-color: #198754;
+}
+.check:hover{
+    color: white;
+    background-color: #157347;
+    border-color: #157347;
+}
+
+.next{
+    border-color: rgb(50, 138, 253);
+    background-color: white;
+    color: rgb(50, 138, 253);
+}
+.next:hover{
+    border-color: rgb(50, 138, 253);
+    background-color: rgb(50, 138, 253);
+    color: white;
+}
+.next:active{
+    border-color: rgb(50, 138, 253);
+    background-color: rgb(50, 138, 253);
+    color: white;
+}
+/* hint button styling */
+.hint-button{
+    color: rgb(93, 152, 93);
+    background-color: white;
+    border-color: rgb(93, 152, 93); 
+}
+.hint-button:hover{
+    color: white;
+    background-color: rgb(93, 152, 93);
+    border-color: rgb(93, 152, 93); 
+    
+}
+
+.show-intervals{
+    border-color: rgb(50, 138, 253);
+    background-color: white;
+    color: rgb(50, 138, 253);
+
+}
+.show-intervals:hover{
+    border-color: rgb(50, 138, 253);
+    background-color: rgb(50, 138, 253);
+    color: white;
+
+}
+.play{
+    background-color: rgb(50, 138, 253);
+    color: white;
+    border-color: rgb(50, 138, 253);
+}
+.play:hover{
+    background-color: rgb(35, 116, 222);
+    color: white;
+    border-color: rgb(35, 116, 222);
+}
+
+
 /* Hero section */
 .hero-section {
     background-color: #f8f9fa;

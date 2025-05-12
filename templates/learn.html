@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="controls text-center mt-4">
-                            <button id="play-scale" class="btn btn-success me-2">Play C Major Scale</button>
+                            <button id="play-scale" class="btn btn-success me-2 play">Play C Major Scale</button>
                         </div>
                     </div>
                     {% endif %}
@@ -66,8 +66,8 @@
                             </div>
                         </div>
                         <div class="controls text-center mt-4">
-                            <button id="play-half-step" class="btn btn-primary me-2">Play Half Step (C to C♯)</button>
-                            <button id="play-whole-step" class="btn btn-primary">Play Whole Step (C to D)</button>
+                            <button id="play-half-step" class="btn btn-primary me-2 play">Play Half Step (C to C♯)</button>
+                            <button id="play-whole-step" class="btn btn-primary play">Play Whole Step (C to D)</button>
                         </div>
                     </div>
                     
@@ -87,8 +87,8 @@
                             </div>
                         </div>
                         <div class="controls text-center mt-4">
-                            <button id="play-half-step-2" class="btn btn-primary me-2">Play Half Step (E to F)</button>
-                            <button id="play-whole-step-2" class="btn btn-primary">Play Whole Step (E to F#)</button>
+                            <button id="play-half-step-2" class="btn btn-primary me-2 play">Play Half Step (E to F)</button>
+                            <button id="play-whole-step-2" class="btn btn-primary play">Play Whole Step (E to F#)</button>
                         </div>
                     </div>
                     
@@ -109,8 +109,8 @@
                             </div>
                         </div>
                         <div class="controls text-center mt-4">
-                            <button id="play-half-step-3" class="btn btn-primary me-2">Play Half Step (F# to G)</button>
-                            <button id="play-whole-step-3" class="btn btn-primary">Play Whole Step (F# to G#)</button>
+                            <button id="play-half-step-3" class="btn btn-primary me-2 play">Play Half Step (F# to G)</button>
+                            <button id="play-whole-step-3" class="btn btn-primary play">Play Whole Step (F# to G#)</button>
                         </div>
                     </div>
                     {% endif %}
@@ -285,7 +285,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-primary play-chord" data-piano="major">Play C Major Chord</button>
+                                    <button class="btn btn-primary play-chord play" data-piano="major">Play C Major Chord</button>
                                     <button class="btn btn-info show-intervals" data-chord-type="major">Show Major Intervals</button>
                                 </div>
                             </div>
@@ -317,7 +317,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-primary play-chord" data-piano="minor">Play C Minor Chord</button>
+                                    <button class="btn btn-primary play-chord play" data-piano="minor">Play C Minor Chord</button>
                                     <button class="btn btn-info show-intervals" data-chord-type="minor">Show Minor Intervals</button>
                                 </div>
                             </div>
@@ -325,7 +325,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
-                            <p class="text-center">This pattern works for any root note. Once you understand how to count intervals, you can build major or minor chords anywhere on the keyboard.</p>
+                            <p class="text-center"><b>This pattern works for any root note.</b> Once you understand how to count intervals, you can build major or minor chords anywhere on the keyboard.</p>
                         </div>
                     </div>
                     {% endif %}
@@ -364,7 +364,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-success check-chord" data-piano="major">Check Chord</button>
+                                    <button class="btn btn-success check-chord check" data-piano="major">Check Chord</button>
                                 </div>
                             </div>
                         </div>
@@ -399,7 +399,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-success check-chord" data-piano="minor">Check Chord</button>
+                                    <button class="btn btn-success check-chord check" data-piano="minor">Check Chord</button>
                                 </div>
                             </div>
                         </div>
@@ -442,7 +442,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-success check-taylor-chord" data-chord="g_major">Check G Major Chord</button>
+                                    <button class="btn btn-success check-taylor-chord check" data-chord="g_major">Check G Major Chord</button>
                                     <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('g-major-hint')">Show Hint</button>
                                     <div id="g-major-hint" class="hint-content mt-2" style="display: none;">
                                         <p class="text-info">G Major: G (root) + B (major third) + D (fifth)</p>
@@ -483,7 +483,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-success check-taylor-chord" data-chord="d_major">Check D Major Chord</button>
+                                    <button class="btn btn-success check-taylor-chord check-chord check" data-chord="d_major">Check D Major Chord</button>
                                     <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('d-major-hint')">Show Hint</button>
                                     <div id="d-major-hint" class="hint-content mt-2" style="display: none;">
                                         <p class="text-info">D Major: D (root) + F♯ (major third) + A (fifth)</p>
@@ -526,7 +526,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-success check-taylor-chord" data-chord="a_minor">Check A Minor Chord</button>
+                                    <button class="btn btn-success check-taylor-chord check" data-chord="a_minor">Check A Minor Chord</button>
                                     <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('a-minor-hint')">Show Hint</button>
                                     <div id="a-minor-hint" class="hint-content mt-2" style="display: none;">
                                         <p class="text-info">A Minor: A (root) + C (minor third) + E (fifth)</p>
@@ -567,7 +567,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-success check-taylor-chord" data-chord="c_major">Check C Major Chord</button>
+                                    <button class="btn btn-success check-taylor-chord check" data-chord="c_major">Check C Major Chord</button>
                                     <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('c-major-hint')">Show Hint</button>
                                     <div id="c-major-hint" class="hint-content mt-2" style="display: none;">
                                         <p class="text-info">C Major: C (root) + E (major third) + G (fifth)</p>
@@ -646,10 +646,10 @@
                                 
                                 <!-- Chord Buttons -->
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-primary play-taylor-chord me-2" data-chord="g_major">G Major</button>
-                                    <button class="btn btn-primary play-taylor-chord me-2" data-chord="d_major">D Major</button>
-                                    <button class="btn btn-primary play-taylor-chord me-2" data-chord="a_minor">A Minor</button>
-                                    <button class="btn btn-primary play-taylor-chord" data-chord="c_major">C Major</button>
+                                    <button class="btn btn-primary play-taylor-chord me-2 play" data-chord="g_major">G Major</button>
+                                    <button class="btn btn-primary play-taylor-chord me-2 play" data-chord="d_major">D Major</button>
+                                    <button class="btn btn-primary play-taylor-chord me-2 play" data-chord="a_minor">A Minor</button>
+                                    <button class="btn btn-primary play-taylor-chord play" data-chord="c_major">C Major</button>
                                 </div>
                             </div>
                         </div>
@@ -691,7 +691,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-success check-beyonce-chord" data-chord="a_major">Check A Major Chord</button>
+                                    <button class="btn btn-success check-beyonce-chord check" data-chord="a_major">Check A Major Chord</button>
                                     <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('a-major-beyonce-hint')">Show Hint</button>
                                     <div id="a-major-beyonce-hint" class="hint-content mt-2" style="display: none;">
                                         <p class="text-info">A Major: A (root) + C♯ (major third) + E (fifth)</p>
@@ -731,7 +731,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-success check-beyonce-chord" data-chord="b_minor">Check B Minor Chord</button>
+                                    <button class="btn btn-success check-beyonce-chord check" data-chord="b_minor">Check B Minor Chord</button>
                                     <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('b-minor-beyonce-hint')">Show Hint</button>
                                     <div id="b-minor-beyonce-hint" class="hint-content mt-2" style="display: none;">
                                         <p class="text-info">B Minor: B (root) + D (minor third) + F♯ (fifth)</p>
@@ -775,7 +775,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-success check-beyonce-chord" data-chord="f_sharp_minor">Check F# Minor Chord</button>
+                                    <button class="btn btn-success check-beyonce-chord check" data-chord="f_sharp_minor">Check F# Minor Chord</button>
                                     <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('f-sharp-minor-hint')">Show Hint</button>
                                     <div id="f-sharp-minor-hint" class="hint-content mt-2" style="display: none;">
                                         <p class="text-info">F# Minor: F# (root) + A (minor third) + C# (fifth)</p>
@@ -816,7 +816,7 @@
                                     </div>
                                 </div>
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-success check-beyonce-chord" data-chord="d_major">Check D Major Chord</button>
+                                    <button class="btn btn-success check-beyonce-chord check" data-chord="d_major">Check D Major Chord</button>
                                     <button class="btn btn-outline-info hint-button mt-2" onclick="toggleHint('d-major-beyonce-hint')">Show Hint</button>
                                     <div id="d-major-beyonce-hint" class="hint-content mt-2" style="display: none;">
                                         <p class="text-info">D Major: D (root) + F♯ (major third) + A (fifth)</p>
@@ -887,10 +887,10 @@
                                 
                                 <!-- Chord Buttons -->
                                 <div class="controls text-center mt-4">
-                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="a_major">A Major</button>
-                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="b_minor">B Minor</button>
-                                    <button class="btn btn-primary play-beyonce-chord me-2" data-chord="f_sharp_minor">F# Minor</button>
-                                    <button class="btn btn-primary play-beyonce-chord" data-chord="d_major">D Major</button>
+                                    <button class="btn btn-primary play-beyonce-chord me-2 play" data-chord="a_major">A Major</button>
+                                    <button class="btn btn-primary play-beyonce-chord me-2 play" data-chord="b_minor">B Minor</button>
+                                    <button class="btn btn-primary play-beyonce-chord me-2 play" data-chord="f_sharp_minor">F# Minor</button>
+                                    <button class="btn btn-primary play-beyonce-chord play" data-chord="d_major">D Major</button>
                                 </div>
                             </div>
                         </div>
