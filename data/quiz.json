@@ -1,11 +1,11 @@
 [
   {
     "question": 1,
-    "prompt": "Listen to this chord and select what it is:",
+    "prompt": "Listen to this chord. Is it major or minor?",
     "type": "multiple_choice",
-    "options": ["B Minor", "D Major", "F# Minor", "G Major"],
+    "options": ["Major", "Minor"],
     "answer": ["B4", "D4", "F#4"],
-    "correct_option": "B Minor"
+    "correct_option": "Minor"
   },
   {
     "question": 2,
